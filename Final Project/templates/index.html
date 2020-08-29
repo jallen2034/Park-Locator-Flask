@@ -38,6 +38,7 @@ Park Map
     // creates variable for keeping track of currently highlighted div
     var markers_dict = new Object();
     var currently_highlighted;
+    var marker_selected;
 
     function initMap(){
       var options = {
@@ -59,11 +60,14 @@ Park Map
         var marker = new google.maps.Marker({
           position:coords,
           map:map,
+          icon: 'https://i.imgur.com/5rNpwiF.png'
+
         });
 
         // my own "scroll" function, so we don't end up repeating it's code when  called/needed
         // un-higlights old element if the currently highlighted global variable is set to anything, then change that selected divs backround colour to white
         // highlights new element, takes the id string from the "info_box_park" & stores it inside of the var "currently_highlighted", to identify that selected dom, sets that selected doms colour to grey
+        // https://stackoverflow.com/questions/11064081/javascript-change-google-map-marker-color
         function zoom(){
           map.setZoom(12);
           map.panTo(marker.getPosition());
@@ -71,6 +75,10 @@ Park Map
           if (currently_highlighted) document.getElementById(currently_highlighted).style.backgroundColor = "white";
           currently_highlighted = info_box_park.id;
           info_box_park.style.backgroundColor = "#f2f2f2";
+          if (marker_selected) marker_selected.setIcon('https://i.imgur.com/5rNpwiF.png')
+          marker_selected = marker;
+          marker.setIcon('https://mts.googleapis.com/vt/icon/name=icons/spotlight/spotlight-waypoint-blue.png&psize=16&font=fonts/Roboto-Regular.ttf&color=ff333333&ax=44&ay=48&scale=1')
+
         }
 
         // my own "scroll" function, does the same as zoom - scrolling the park into view upon being called
