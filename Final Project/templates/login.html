@@ -1,0 +1,40 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Log In
+{% endblock %}
+
+{% block main %}
+
+<!-- alert for any errors passed in -->
+<div class ="alert-messages">
+  {% if errors %}
+  <!-- div containing the error message-->
+  <div class="alert alert-danger fade show p-1" role="alert" style="position:abolute;z-index:999">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    {{ errors }}
+  </div>
+  {% endif %}
+</div>
+
+<!-- js to auto close the boostrap alert -->
+<script>
+  // hide and show the error
+  $(document).ready(function() {
+    // function to hide the alert
+    setTimeout(function() {
+      $(".alert").alert('close');
+    }, 2500);
+  });
+</script>
+
+<form action="/login" method="post">
+  <div class="form-group">
+    <input autocomplete="off" autofocus class="form-control" name="username" placeholder="Username" type="text">
+  </div>
+  <div class="form-group">
+    <input class="form-control" name="password" placeholder="Password" type="password">
+  </div>
+  <button class="btn btn-primary" type="submit">Log In</button>
+</form>
+{% endblock %}

@@ -1,0 +1,110 @@
+/*  https://cs50.harvard.edu/x/2020/tracks/web/finance/ */
+
+nav .navbar-brand
+{
+  /* size for brand */
+  font-size: xx-large;
+}
+
+form {
+  margin-top: 99px;
+}
+
+main .form-control{
+  /* center form controls */
+  display: inline-block;
+  /* override Bootstrap's 100% width for form controls */
+  width: auto;
+}
+
+main {
+  /* scroll horizontally as needed */
+  overflow-x: auto;
+  /* center contents */
+  text-align: center;
+}
+
+main img
+{
+  /* constrain images on small screens */
+  max-width: 100%;
+}
+
+/* https://www.w3schools.com/css/css3_flexbox.asp */
+.flex-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  padding-top: 75px;
+  max-width: 1900px;
+  max-height: 700px;
+}
+
+
+/* https://stackoverflow.com/questions/2566290/html-how-to-create-a-div-with-only-vertical-scroll-bars-for-long-paragraphs */
+.col-md-4{
+  margin-top: 20px;
+  margin-bottom: 28px;
+  margin-left: 0px;
+  margin-right: 0px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  max-height: 625px;
+  max-width: 480px;
+}
+
+.col-md-8{
+  margin-top: 20px;
+  margin-bottom: 28px;
+  margin-left: -15px;
+  margin-right: 0px;
+  max-width: 1150px;
+}
+
+img {
+  vertical-align: middle;
+  border-style: none;
+  margin-right: 7px;
+}
+
+/* fixed styling for the error messages */
+.alert-messages {
+  position: fixed;
+  top: 76px;
+  left: 0;
+  right: 0;
+  z-index: 7000;
+}
+
+#alert_placeholder {
+  position: fixed;
+  top: 76px;
+  left: 0;
+  right: 0;
+  z-index: 7000;
+}
+
+#map{
+  height: 625px;
+  width: 100%;
+}
+
+ul {
+  list-style-type: none;
+}
+
+/* https://www.w3schools.com/cssref/sel_class.asp */
+.list_item {
+  margin-top: 23px;
+  margin-bottom: 25px;
+  margin-right: -15px;
+  padding-top: 21px;
+  padding-bottom: 25px;
+}
+
+main.container.p-5{
+  max-width: 2000px;
+}
