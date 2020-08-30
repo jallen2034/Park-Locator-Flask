@@ -17,16 +17,11 @@ Park Map
   {% endif %}
 </div>
 
+<!-- Div that holds the temp boostrap notification -->
 <div id="alert_placeholder"></div>
 
-<script>
-  // JS to hide and show the login error
-  $(document).ready(function() {
-    setTimeout(function() {
-      $(".alert").alert('close');
-    }, 3000);
-  });
-</script -->
+<!-- JS script to hide and show the login error -->
+<script src="static/js/DismissLogin.js"></script>
 
 <body>
   <!-- script to init the google map -->
@@ -61,7 +56,6 @@ Park Map
           position:coords,
           map:map,
           icon: 'https://i.imgur.com/5rNpwiF.png'
-
         });
 
         // my own "scroll" function, so we don't end up repeating it's code when  called/needed
@@ -72,11 +66,11 @@ Park Map
           map.setZoom(12);
           map.panTo(marker.getPosition());
           info_box_park.scrollIntoView({ behavior: 'smooth',});
-          
+
           if (currently_highlighted) document.getElementById(currently_highlighted).style.backgroundColor = "white";
           currently_highlighted = info_box_park.id;
           info_box_park.style.backgroundColor = "#f2f2f2";
-          
+
           if (marker_selected) marker_selected.setIcon('https://i.imgur.com/5rNpwiF.png')
           marker_selected = marker;
           marker.setIcon('https://mts.googleapis.com/vt/icon/name=icons/spotlight/spotlight-waypoint-blue.png&psize=16&font=fonts/Roboto-Regular.ttf&color=ff333333&ax=44&ay=48&scale=1')
@@ -86,11 +80,11 @@ Park Map
         function scroll(){
           map.setZoom(12);
           map.panTo(marker.getPosition());
-          
+
           if (currently_highlighted) document.getElementById(currently_highlighted).style.backgroundColor = "white";
           currently_highlighted = info_box_park.id;
           info_box_park.style.backgroundColor = "#f2f2f2";
-          
+
           if (marker_selected) marker_selected.setIcon('https://i.imgur.com/5rNpwiF.png')
           marker_selected = marker;
           marker.setIcon('https://mts.googleapis.com/vt/icon/name=icons/spotlight/spotlight-waypoint-blue.png&psize=16&font=fonts/Roboto-Regular.ttf&color=ff333333&ax=44&ay=48&scale=1')
