@@ -243,6 +243,3 @@ def send_to_my_parks():
                                   user_id=user_id)
 
     return saved_parks_dict
-
-
-
