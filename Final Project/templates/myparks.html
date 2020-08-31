@@ -35,6 +35,10 @@ My Parks
         <button type="button" class="btn btn-outline-secondary" id="{{ dictionary["place_id"] }}">Go to on Map</button>
       </div>
       {% endfor %}
+
+      <!-- JS script to hide and show the login error -->
+      <script src="static/js/DeletePark.js"></script>
+
       <!-- call MapAjax.js script to loop through all of my divs & take the "park_id" from the buttons in these divs, & send that id to flask with ajax -->
       <script src="static/js/AjaxMapErrors.js"></script>
     </div>
