@@ -6,6 +6,42 @@ My Parks
 {% endblock %}
 
 {% block main %}
-
+  <!-- Table body -->
+  <tbody>
+    <!-- Loop to create table rows containing each list of the passed in dicts -->
+     <div class="margin: auto 1.5em; display: inline-block">
+        <div class="saved_list">
+          <!-- jinja forloop to create unique divs for each park from my python dict-->
+          {% for dictionary in saved_parks_dict %}
+          <div class="list_item" id="Park {{ dictionary["place_id"] }}">
+            <h3 class="{{ dictionary["place_id"] }}">
+              {{ dictionary["name"] }}
+            </h3>
+            <h6 class="{{ dictionary["place_id"] }}">
+              {{ dictionary["formatted_address"] }}
+            </h6>
+            {% if dictionary["phone"] is not none %}
+            <h6 class="{{ dictionary["place_id"] }}">
+              {{ dictionary["phone"] }}
+            </h6>
+            {% endif %}
+            {% if dictionary["website"] is not none %}
+            <h6 class="{{ dictionary["place_id"] }}">
+              <a href= "{{ dictionary["website"] }}" > Website </a>
+            </h6>
+            {% endif %}
+            <!-- boostrap buttons to add that park to the users saved park and also navigate them to the reviews tab!-->
+            <!-- create a button that calls a python function in my flask webserver when its pressed -->
+            <button type="button" type="submit" class="btn btn-outline-danger remove_from_parks_buttons" id="{{ dictionary["place_id"] }}">Remove From Saved Parks</button>
+            <button type="button" class="btn btn-outline-info" id="{{ dictionary["place_id"] }}">Reviews</button>
+            <button type="button" class="btn btn-outline-secondary" id="{{ dictionary["place_id"] }}">Go to on Map</button>
+          </div>
+          {% endfor %}
+          <!-- call MapAjax.js script to loop through all of my divs & take the "park_id" from the buttons in these divs, & send that id to flask with ajax -->
+          <script src="static/js/AjaxMapErrors.js"></script>
+        </div>
+      </div>
+  </tbody>
+</table>
 
 {% endblock %}
