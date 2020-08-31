@@ -37,10 +37,10 @@ main img
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  margin: auto;
-  padding-top: 75px;
-  max-width: 1900px;
-  max-height: 700px;
+  margin-top: 3%;
+  padding-top: 3%;
+  max-width: 100%;
+  max-height: 85%;
 }
 
 
@@ -56,12 +56,22 @@ main img
   max-width: 480px;
 }
 
+.col-md-12 {
+  margin-top: 15px;
+  margin-bottom: 0px;
+  margin-left: 0px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  max-height: 825px;
+  max-width: 570px;
+}
+
 .col-md-8{
   margin-top: 20px;
   margin-bottom: 28px;
   margin-left: -15px;
   margin-right: 0px;
-  max-width: 1150px;
+  max-width: 1250px;
 }
 
 img {
@@ -77,6 +87,18 @@ img {
   left: 0;
   right: 0;
   z-index: 7000;
+}
+
+.h6, h6 {
+    font-size: 1rem;
+    padding-top: 8px;
+    padding-bottom: 8px;
+}
+
+.h3, h3 {
+    font-size: 1.75rem;
+    padding-top: 8px;
+    padding-bottom: 8px;
 }
 
 #alert_placeholder {
@@ -105,6 +127,26 @@ ul {
   padding-bottom: 25px;
 }
 
+/* https://www.w3schools.com/cssref/sel_class.asp */
+.list_item_myparks {
+  margin-top: 10px;
+  margin-bottom: 25px;
+  margin-right: -15px;
+  padding-top: 25px;
+  padding-bottom: 25px;
+  max-width: 550px;
+  align-items: center;
+
+}
+
+/* https://stackoverflow.com/questions/1719452/how-to-make-a-div-always-full-screen */
 main.container.p-5{
   max-width: 2000px;
+  overflow: hidden;
+}
+
+.h6, h6 {
+    font-size: 1rem;
+    padding-top: 0px;
+    padding-bottom: 12px;
 }
