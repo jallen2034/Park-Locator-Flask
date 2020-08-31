@@ -30,7 +30,9 @@ Session(app)
 app.config["TEMPLATES_AUTO_RELOAD"] = True
 
 # set the maps api key as config
-app.config['GOOGLEMAPS_KEY'] = "8JZ7i18MjFuM35dJHq70n3Hx4"
+# https://medium.com/black-tech-diva/hide-your-api-keys-7635e181a06c
+API_KEY = config.api_key
+app.config['GOOGLEMAPS_KEY'] = API_KEY
 
 # Initialize the extension
 GoogleMaps(app)
@@ -79,7 +81,7 @@ def parkcall():
 
     # Query database for all of the parks currently stored in the "user_saved_parks" table
     saved_parks_dict = db.execute("SELECT * FROM user_saved_parks WHERE id = :user_id",
-                      user_id=user_id)
+                                  user_id=user_id)
 
     # Extract the button id from this returned dict, then store these values in seperate variables
     extracted_button_id = button_id["clicked_button"]
@@ -90,7 +92,7 @@ def parkcall():
            return jsonify({'error_notification' : error})
 
     # Query database for all of the parks currently stored in the "user_saved_parks" table
-    saved_parks_dict = db.execute("INSERT INTO user_saved_parks (id, place_id) VALUES (?, ?);",
+    db.execute("INSERT INTO user_saved_parks (id, place_id) VALUES (?, ?);",
                       user_id, extracted_button_id)
 
     # return our "success" message with JSON to our front end for ajax to recieve and our page to later use
@@ -102,7 +104,27 @@ def parkcall():
 def myparks():
     """Page with all parks"""
     if request.method == "GET":
-        return render_template("myparks.html")
+
+        user_id = session["user_id"]
+        saved_parks_dict = send_to_my_parks()
+        # pprint.pprint(saved_parks_dict)
+        return render_template("myparks.html", saved_parks_dict=saved_parks_dict)
+
+    else:
+        user_id = session["user_id"]
+
+        # all potential errors + success messages that can be rendered on the buy html
+        success = "Park has been removed from your saved parks!"
+
+        # get the delete button/form clicked on in my parks page
+        post_place_id = request.form.get('delete')
+
+        print(post_place_id)
+
+        # delete this park from the user saved parks table
+        db.execute("DELETE FROM user_saved_parks WHERE place_id='post_place_id' AND id='user_id';",
+                    user_id, post_place_id)
+
 
 # app route to see all reviews of parks
 @app.route("/reviews", methods=["GET", "POST"])
@@ -210,3 +232,17 @@ def send_to_index():
     index_park_info = db.execute("SELECT place_id, name, formatted_address, phone, website, location_lat, location_long FROM (SELECT * FROM all_skateparks JOIN skatepark_location ON all_skateparks.place_id = skatepark_location.place_id);")
 
     return index_park_info
+
+def send_to_my_parks():
+
+    # Extract the current logged in users ID from the session["user_id"] dict & store it inside of "user_id" to use below
+    user_id = session["user_id"]
+
+    # Query database for all of the parks currently stored in the "user_saved_parks" table
+    saved_parks_dict = db.execute("SELECT place_id, name, formatted_address, phone, website FROM (SELECT * FROM user_saved_parks JOIN all_skateparks ON user_saved_parks.place_id = all_skateparks.place_id WHERE id = :user_id)",
+                                  user_id=user_id)
+
+    return saved_parks_dict
+
+
+
