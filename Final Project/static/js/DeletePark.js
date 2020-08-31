@@ -20,14 +20,30 @@ for (let i = 0; i < del_button.length; i++) {
       contentType: "application/json",
       data: JSON.stringify({ clicked_button : button_id })
 
-    // the response our flask web server will pass back to AJAX
+      // the response our flask web server will pass back to AJAX
     })).done(function(response) {
       console.log(response);
       console.log('ajax call has been succ');
       var extracted_response = response.success_notification;
       console.log(extracted_response);
+
+      // https://stackoverflow.com/questions/10082330/dynamically-create-bootstrap-alerts-box-through-javascript
+      // call the #alert_placeholder temp div and populate it with the boostrap banner
+      bootstrap_alert = function() {}
+      bootstrap_alert.warning = function(extracted_response) {
+        $('#alert_placeholder').html('<div class="alert alert-primary fade show p-1" role="alert" style="position:abolute;z-index:999;">'+extracted_response+'</span></div>')
+      }
+      // display the alert and the div
+      bootstrap_alert.warning(extracted_response);
+
+      // function to hide the alert after 3.5 secs
+      $(document).ready(function() {
+        setTimeout(function() {
+          $(".alert").alert('close');
+        }, 3000);
+      });
     })
-   // hide this div that was just clicked on
-   park_div[i].style.display = "none"
+    // hide this div that was just clicked on
+    park_div[i].style.display = "none"
   }
 }
