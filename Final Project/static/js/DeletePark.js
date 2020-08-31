@@ -1,6 +1,7 @@
 // use JS to grab every button on my page by their designated class_name "remove_from_parks_button"
 // these buttons by their clase name are stored in an array, into a single variable
 let del_button = document.getElementsByClassName("remove_from_parks_buttons");
+let park_div = document.getElementsByClassName("list_item");
 
 // loop through every button on the page by its collected "element", detect when the [i]th "Add to My Parks" button looped through is clicked & store it inside "button_id"
 for (let i = 0; i < del_button.length; i++) {
@@ -26,5 +27,7 @@ for (let i = 0; i < del_button.length; i++) {
       var extracted_response = response.success_notification;
       console.log(extracted_response);
     })
+   // hide this div that was just clicked on
+   park_div[i].style.display = "none"
   }
 }
