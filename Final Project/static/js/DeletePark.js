@@ -43,7 +43,7 @@ for (let i = 0; i < del_button.length; i++) {
         }, 3000);
       });
     })
-    // hide this div that was just clicked on
+    // https://www.w3schools.com/howto/howto_js_toggle_hide_show.asp
     park_div[i].style.display = "none"
   }
 }
