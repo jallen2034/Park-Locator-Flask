@@ -1,6 +1,7 @@
 // use JS to grab every button on my page by their designated class_name "add_to_parks_buttons"
 // these buttons by their clase name are stored in an array, into a single variable
 let add_to_button = document.getElementsByClassName("add_to_parks_buttons");
+let button_id;
 
 // loop through every button on the page by its collected "element", detect when the [i]th "Add to My Parks" button looped through is clicked & store it inside "button_id"
 for (let i = 0; i < add_to_button.length; i++) {
@@ -42,7 +43,7 @@ for (let i = 0; i < add_to_button.length; i++) {
         $(document).ready(function() {
           setTimeout(function() {
             $(".alert").alert('close');
-          }, 3000);
+          }, 3500);
         });
 
       } else {
@@ -63,7 +64,7 @@ for (let i = 0; i < add_to_button.length; i++) {
         $(document).ready(function() {
           setTimeout(function() {
             $(".alert").alert('close');
-          }, 3000);
+          }, 3500);
         });
       }
     })
