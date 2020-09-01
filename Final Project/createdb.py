@@ -1,3 +1,4 @@
+# python script to automate the creation of my parks db/tables
 from cs50 import SQL
 
 # Configure CS50 Library to use SQLite database
