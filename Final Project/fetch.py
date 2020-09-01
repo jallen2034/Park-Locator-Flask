@@ -1,4 +1,5 @@
 # https://github.com/googlemaps/google-maps-services-python
+# python script to call the gplaces API, get every skatepark in Vancouver, and dump them into my SQLlitedb
 # pip install googlemaps
 # pip install prettyprint
 
