@@ -37,12 +37,12 @@ main img
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  margin-top: 3%;
+  margin-top: 5%;
+  margin-bottom: 5%;
   padding-top: 3%;
   max-width: 100%;
   max-height: 95%;
 }
-
 
 /* https://stackoverflow.com/questions/2566290/html-how-to-create-a-div-with-only-vertical-scroll-bars-for-long-paragraphs */
 .col-md-4{
@@ -62,15 +62,14 @@ main img
   overflow-y: scroll;
   overflow-x: hidden;
   max-height: 70%;
-  max-width: 30%;
+  max-width: 35%;
 }
 
-.col-md-8{
+.col-md-8 {
   margin-top: 20px;
   margin-bottom: 28px;
-  margin-left: -15px;
-  margin-right: 0px;
-  max-width: 1250px;
+  max-width: 1270px;
+  padding-left: 1px;
 }
 
 img {
@@ -133,7 +132,7 @@ ul {
   margin-right: -15px;
   padding-top: 25px;
   padding-bottom: 25px;
-  max-width: 550px;
+  max-width: 580px;
   align-items: center;
 
 }
