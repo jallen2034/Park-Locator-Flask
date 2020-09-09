@@ -102,8 +102,7 @@ Park Map
   </script>
   <!-- script to load the google maps JS API to use on the front end of our web app -->
   <!-- this will try to load a function called init map -->
-  <script defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAdojekZi5cr_AdmgSpt_4KIS_JA0x8Ax0&callback=initMap">
-  </script>
+  <script defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAdojekZi5cr_AdmgSpt_4KIS_JA0x8Ax0&callback=initMap"></script>
   <!-- https://www.w3schools.com/css/css3_flexbox.asp -->
   <!-- div to place the map on the left side of the window -->
   <div class="flex-container">
@@ -137,8 +136,13 @@ Park Map
             <button type="button" class="btn btn-outline-info" id="{{ dictionary["place_id"] }}">Reviews</button>
           </div>
           {% endfor %}
+
           <!-- call MapAjax.js script to loop through all of my divs & take the "park_id" from the buttons in these divs, & send that id to flask with ajax -->
           <script src="static/js/AjaxMapErrors.js"></script>
+
+          <!-- script that will listen for the localstorage to have a park id in it, then use jscript  to click on that div to center the map -->
+          <script src="static/js/ClickDiv_LocalStorage.js"></script>
+
         </div>
       </div>
     </div>
