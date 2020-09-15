@@ -73,10 +73,10 @@ def parkcall():
     # https://stackoverflow.com/questions/48595068/process-ajax-request-in-flask
     # https://flask.palletsprojects.com/en/0.12.x/patterns/jquery/
     # request.get.json() functiona lso conversts returned JSON from our AJAX call into a Python Dict
-    button_id = request.get_json()
+    add_button_id = request.get_json()
 
      # Print the type of data variable
-    print("Type:", type(button_id))
+    print("Type:", type(add_button_id))
 
 
     # Query database for all of the parks currently stored in the "user_saved_parks" table
@@ -84,7 +84,7 @@ def parkcall():
                                   user_id=user_id)
 
     # Extract the button id from this returned dict, then store these values in seperate variables
-    extracted_button_id = button_id["clicked_button"]
+    extracted_button_id = add_button_id["clicked_button"]
 
     # loop through "saved_parks_dict", if it finds the "place_id" in the returned "button_id" from ajax matches the "place_ID" in the returned dict from our db, pass an error as a JSON object back to the front end
     for dictionary in saved_parks_dict:
@@ -98,41 +98,49 @@ def parkcall():
     # return our "success" message with JSON to our front end for ajax to recieve and our page to later use
     return jsonify({'success_notification' : success})
 
+# app route to recieve the ajax call from "my_parks" pages delete button to delete the park from the users saved parks
+@app.route("/parkdelete", methods=["POST"])
+@login_required
+def parkdelete():
+    """Page with all parks"""
+
+    user_id = session["user_id"]
+
+    # all potential errors + success messages that can be rendered on the buy html
+    success = "Park has been removed from your saved parks!"
+
+    # request.get.json() functiona lso conversts returned JSON from our AJAX call into a Python Dict
+    del_button_id = request.get_json()
+
+    print("Type:", type(del_button_id))
+
+    # Extract the button id from this returned dict, then store these values in seperate variables
+    extracted_button_id = del_button_id["clicked_button"]
+
+    # delete this park from the user saved parks table
+    db.execute("DELETE FROM user_saved_parks WHERE id = :userid AND place_id = :place_id;",
+                userid=user_id, place_id=extracted_button_id)
+
+    # return our "success" message with JSON to our front end for ajax to recieve and our page to later use
+    return jsonify({'success_notification' : success})
+
 # app route to see your saved parks
-@app.route("/myparks", methods=["GET", "POST"])
+@app.route("/myparks", methods=["GET"])
 @login_required
 def myparks():
     """Page with all parks"""
-    if request.method == "GET":
-
-        user_id = session["user_id"]
-        saved_parks_dict = send_to_my_parks()
-        # pprint.pprint(saved_parks_dict)
-        return render_template("myparks.html", saved_parks_dict=saved_parks_dict)
-
-    else:
-        user_id = session["user_id"]
-
-        # all potential errors + success messages that can be rendered on the buy html
-        success = "Park has been removed from your saved parks!"
-
-        # get the delete button/form clicked on in my parks page
-        post_place_id = request.form.get('delete')
-
-        print(post_place_id)
-
-        # delete this park from the user saved parks table
-        db.execute("DELETE FROM user_saved_parks WHERE place_id='post_place_id' AND id='user_id';",
-                    user_id, post_place_id)
-
+    saved_parks_dict = send_to_my_parks()
+    # pprint.pprint(saved_parks_dict)
+    return render_template("myparks.html", saved_parks_dict=saved_parks_dict)
 
 # app route to see all reviews of parks
-@app.route("/reviews", methods=["GET", "POST"])
+@app.route("/reviews", methods=["GET"])
 @login_required
 def reviews():
-    """Page with all parks"""
-    if request.method == "GET":
-        return render_template("reviews.html")
+    """Page with park reviews"""
+    new_review_dict = send_to_reviews()
+    pprint.pprint(new_review_dict)
+    return render_template("reviews.html", new_review_dict=new_review_dict)
 
 # app route to register an account
 @app.route("/register", methods=["GET", "POST"])
@@ -239,7 +247,29 @@ def send_to_my_parks():
     user_id = session["user_id"]
 
     # Query database for all of the parks currently stored in the "user_saved_parks" table
-    saved_parks_dict = db.execute("SELECT place_id, name, formatted_address, phone, website FROM (SELECT * FROM user_saved_parks JOIN all_skateparks ON user_saved_parks.place_id = all_skateparks.place_id WHERE id = :user_id)",
+    saved_parks_dict = db.execute("SELECT place_id, name, formatted_address, phone, website, location_lat, location_long FROM (SELECT * FROM user_saved_parks JOIN all_skateparks ON user_saved_parks.place_id = all_skateparks.place_id JOIN skatepark_location ON all_skateparks.place_id = skatepark_location.place_id WHERE id = :user_id)",
                                   user_id=user_id)
-
     return saved_parks_dict
+
+
+def send_to_reviews():
+
+    new_review_dict = {}
+
+    # Query database for all of the parks currently stored in the "all_skateparks" and "skateparks_reviews" tables
+    review_parks_dict = db.execute("SELECT * FROM all_skateparks JOIN skatepark_reviews ON all_skateparks.place_id = skatepark_reviews.place_id;")
+
+    # loop through the old list of dicts our SQL query returned in "review_parks_dict"
+    for sqlDict in review_parks_dict:
+        # create "park_name" var and set it to the current review_parks_dict "Name" in that list currenty being looped through
+        park_name = sqlDict["name"]
+        sqlDict.pop("name")
+        # when this forloop hits a new index of the list in "review_parks_dict", check if "review_parks_dict" already has already been a key thats been set in that new dict or not
+        if park_name in new_review_dict.keys():
+            # copy the current dict from 'review_parks_dict' being loope dthrough, adding it as a new index into the array for this current (parks) key in our new 'new_review_dict'
+            new_review_dict[park_name].append(sqlDict)
+        else:
+            # otherwise, when looping through, if no key has been made in our new dict using an existing park name from your old dick, create a new key in new_review_dict using the current "park_name"
+            new_review_dict[park_name] = [sqlDict]
+
+    return new_review_dict
