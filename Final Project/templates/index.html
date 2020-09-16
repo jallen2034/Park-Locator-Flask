@@ -31,7 +31,7 @@ Park Map
     var markers_dict = new Object();
     var currently_highlighted;
     var marker_selected;
-    
+
     function initMap(){
       var options = {
         zoom:12,
@@ -39,15 +39,15 @@ Park Map
         disableDefaultUI: true,
         clickableIcons: false
       }
-      
+
       var map = new google.maps.Map(document.getElementById('map'), options);
-      
+
       // use jinja to loop through the index_park_info python dict we created our divs from
       {% for dictionary in index_park_info %}
       var park_id = "{{ dictionary["place_id"] }}";
       addMarker({lat:{{ dictionary["location_lat"] }},lng:{{ dictionary["location_long"] }}}, park_id);
       {% endfor %}
-      
+
       // add marker function to add markers to our map
       function addMarker(coords, park_id){
         var info_box_park = document.getElementById("Park " + park_id);
@@ -56,7 +56,7 @@ Park Map
           map:map,
           icon: 'https://i.imgur.com/5rNpwiF.png'
         });
-        
+
         // my own "scroll" function, so we don't end up repeating it's code when  called/needed
         // un-higlights old element if the currently highlighted global variable is set to anything, then change that selected divs backround colour to white
         // highlights new element, takes the id string from the "info_box_park" & stores it inside of the var "currently_highlighted", to identify that selected dom, sets that selected doms colour to grey
@@ -65,41 +65,41 @@ Park Map
           map.setZoom(12);
           map.panTo(marker.getPosition());
           info_box_park.scrollIntoView({ behavior: 'smooth',});
-          
+
           if (currently_highlighted){
             document.getElementById(currently_highlighted).style.backgroundColor = "white";
           }
           currently_highlighted = info_box_park.id;
           info_box_park.style.backgroundColor = "#f2f2f2";
-          
+
           if (marker_selected){
             marker_selected.setIcon('https://i.imgur.com/5rNpwiF.png')
           }
           marker_selected = marker;
           marker.setIcon('https://mts.googleapis.com/vt/icon/name=icons/spotlight/spotlight-waypoint-blue.png&psize=16&font=fonts/Roboto-Regular.ttf&color=ff333333&ax=44&ay=48&scale=1')
         }
-        
+
         // my own "zoom" function, does the same as zoom but doesnt scroll the div
         function zoom(){
           map.setZoom(12);
           map.panTo(marker.getPosition());
-          
+
           if (currently_highlighted){
             document.getElementById(currently_highlighted).style.backgroundColor = "white";
           }
           currently_highlighted = info_box_park.id;
           info_box_park.style.backgroundColor = "#f2f2f2";
-          
+
           if (marker_selected){
             marker_selected.setIcon('https://i.imgur.com/5rNpwiF.png')
           }
           marker_selected = marker;
           marker.setIcon('https://mts.googleapis.com/vt/icon/name=icons/spotlight/spotlight-waypoint-blue.png&psize=16&font=fonts/Roboto-Regular.ttf&color=ff333333&ax=44&ay=48&scale=1')
         }
-        
+
         // listener to call the zoom function for when a marker is clicked on
         marker.addListener('click', function(){scroll();});
-        
+
         // listener we put on the info_box_park div when clicked on, it'll centre the map on the marker
         info_box_park.addEventListener('click', function(){zoom();});
       }
@@ -141,10 +141,10 @@ Park Map
             <button type="button" class="btn btn-outline-info" id="{{ dictionary["place_id"] }}">Reviews</button>
           </div>
           {% endfor %}
-          
+
           <!-- call MapAjax.js script to loop through all of my divs & take the "park_id" from the buttons in these divs, & send that id to flask with ajax -->
           <script src="static/js/AjaxMapErrors.js"></script>
-          
+
           <!-- script that will listen for the localstorage to have a park id in it, then use jscript  to click on that div to center the map -->
           <script src="static/js/ClickDiv_LocalStorage.js"></script>
         </div>
