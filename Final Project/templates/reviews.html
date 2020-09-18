@@ -28,6 +28,7 @@ My Parks
             {% for inner_key, inner_dict in index.items() %}
             <div class="reviews_inner_div" id="Park {{ inner_dict["place_id"] }}">
               <h6 class="{{ inner_dict["place_id"] }}">
+               <!-- when looping through this dict, if a key is the place_id, don't display it to the screen -->
                {% if inner_key != "place_id" %}
                  {{ inner_dict }}
                {% endif %}
