@@ -2,10 +2,45 @@
 
 <!-- title of page -->
 {% block title %}
-Reviews
+My Parks
 {% endblock %}
 
 {% block main %}
 
-
+<!-- Div that holds the temp boostrap notification -->
+<div id="alert_placeholder"></div>
+<div class="flex-container">
+  <div class="col-md-12">
+    <!-- Loop to create table rows containing each list of the passed in dicts -->
+    <div class="margin: auto 1.5em; display: inline-block">
+      <div class="saved_list">
+        <!-- "new_review_dict" is a dict, containing key value pairs which have a list value, that list then holds dictionaries, which in turn hold key value pairs. -->
+        <!-- jinja forloop to loop through the nested list of dictionaries in new_review_dict-->
+        {% for outer_key, outer_dict in new_review_dict.items() %}
+        <!-- print outer key/park name -->
+        <h3 class="{{ outer_dict["place_id"] }}">
+              {{ outer_key }}
+        </h3>
+        <div class="list_item_myparks" id "Park {{ outer_dict["place_id"] }}">
+          <!-- loop through the nested list (of dicts) -->
+          {% for index in outer_dict %}
+            <!-- loop through the dicts inside that list -->
+            {% for inner_key, inner_dict in index.items() %}
+            <div class="reviews_inner_div" id="Park {{ inner_dict["place_id"] }}">
+              <h6 class="{{ inner_dict["place_id"] }}">
+               {% if inner_key != "place_id" %}
+                 {{ inner_dict }}
+               {% endif %}
+              </h6>
+            </div>
+            {% endfor %}
+          {% endfor %}
+          <button type="button" class="btn btn-outline-secondary go_to_on_map" id="{{ outer_dict[0]["place_id"] }}">Go to on Map</button>
+        </div>
+        {% endfor %}
+        <script src="static/js/GoToOnMap.js"></script>
+      </div>
+    </div>
+  </div>
 {% endblock %}
+
