@@ -24,17 +24,17 @@ My Parks
             </h3>
             <!-- loop through the nested list (of dicts) -->
             {% for index in outer_dict %}
-            <!-- loop through the dicts inside that list -->
-            {% for inner_key, inner_dict in index.items() %}
-            <div class="reviews_inner_div" id="Park {{ inner_dict["place_id"] }}">
-              <p class="{{ inner_dict["place_id"] }}" style="font-size:85%">
-                <!-- when looping through this dict, if a key is the place_id, don't display it to the screen -->
-                {% if inner_key != "place_id" %}
-                {{ inner_dict }}
-                {% endif %}
-              </p>
-            </div>
-            {% endfor %}
+              <!-- loop through the dicts inside that list -->
+              {% for inner_key, inner_dict in index.items() %}
+              <div class="reviews_inner_div" id="Park {{ inner_dict["place_id"] }}">
+                <p class="{{ inner_dict["place_id"] }}" style="font-size:85%">
+                  <!-- when looping through this dict, if a key is the place_id, don't display it to the screen -->
+                  {% if inner_key != "place_id" %}
+                    {{ inner_dict }}
+                  {% endif %}
+                </p>
+              </div>
+              {% endfor %}
             {% endfor %}
             <div class= "button">
               <button type="button" class="btn btn-outline-secondary go_to_on_map" id="{{ outer_dict[0]["place_id"] }}" >Go to on Map</button>
