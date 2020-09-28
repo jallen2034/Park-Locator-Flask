@@ -141,12 +141,10 @@ Park Map
             <button type="button" class="btn btn-outline-info" id="{{ dictionary["place_id"] }}">Reviews</button>
           </div>
           {% endfor %}
-
           <!-- call MapAjax.js script to loop through all of my divs & take the "park_id" from the buttons in these divs, & send that id to flask with ajax -->
           <script src="static/js/AjaxMapErrors.js"></script>
-
           <!-- script that will listen for the localstorage to have a park id in it, then use jscript  to click on that div to center the map -->
-          <script src="static/js/ClickDiv_LocalStorage.js"></script>
+          <script src="static/js/ClickDiv_LocalStorage_Index.js"></script>
         </div>
       </div>
     </div>
