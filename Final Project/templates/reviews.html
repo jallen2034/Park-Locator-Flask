@@ -8,6 +8,10 @@ My Parks
 {% block main %}
 <!-- Div that holds the temp boostrap notification -->
 <div id="alert_placeholder"></div>
+<!-- Div with the text search box -->
+<div class="gallery-search">
+  <input type="text" name="input-filter" class=form-control id="input-filter" placeholder="Search Here">
+</div>
 <div class="flex-container">
   <div class="col-md-12">
     <!-- Loop to create table rows containing each list of the passed in dicts -->
@@ -16,36 +20,38 @@ My Parks
         <!-- "new_review_dict" is a dict, containing key value pairs which have a list value, that list then holds dictionaries, which in turn hold key value pairs. -->
         <!-- jinja forloop to loop through the nested list of dictionaries in new_review_dict-->
         {% for outer_key, outer_dict in new_review_dict.items() %}
-        <div class="review_parks" id="{{ outer_key  }}">
-          <div class="list_item_myparks" id="Park {{ outer_dict["place_id"] }}">
+        <div class="review_parks" id="Park {{ outer_dict[0]["place_id"] }}">
             <!-- print outer key/park name -->
             <h3 class="{{ outer_dict["place_id"] }}">
               {{ outer_key }}
             </h3>
             <!-- loop through the nested list (of dicts) -->
             {% for index in outer_dict %}
-              <!-- loop through the dicts inside that list -->
-              {% for inner_key, inner_dict in index.items() %}
-              <div class="reviews_inner_div" id="Park {{ inner_dict["place_id"] }}">
-                <p class="{{ inner_dict["place_id"] }}" style="font-size:85%">
-                  <!-- when looping through this dict, if a key is the place_id, don't display it to the screen -->
-                  {% if inner_key != "place_id" %}
-                    {{ inner_dict }}
-                  {% endif %}
-                </p>
-              </div>
-              {% endfor %}
+            <!-- loop through the dicts inside that list -->
+            {% for inner_key, inner_dict in index.items() %}
+            <div class="reviews_inner_div" id="Park {{ inner_dict["place_id"] }}">
+              <p class="{{ inner_dict["place_id"] }}" style="font-size:85%">
+                <!-- when looping through this dict, if a key is the place_id, don't display it to the screen -->
+                {% if inner_key != "place_id" %}
+                {{ inner_dict }}
+                {% endif %}
+              </p>
+            </div>
+            {% endfor %}
             {% endfor %}
             <div class= "button">
               <button type="button" class="btn btn-outline-secondary go_to_on_map" id="{{ outer_dict[0]["place_id"] }}" >Go to on Map</button>
             </div>
-          </div>
         </div>
         {% endfor %}
         <!-- call MapAjax.js script to loop through all of my divs & take the "go_to_on_map" from the buttons in these divs, & send that id to our browser's local storage to be used later  -->
         <script src="static/js/GoToOnMap.js"></script>
         <!-- JS script to highlight a div clicked on -->
         <script src="static/js/HighlightReviewPark.js"></script>
+        <!-- JS script to filter the divs by inout in the text search box -->
+        <!-- TODO -->
+        <!-- script that will listen for the localstorage to have a park id in it, then use jscript to click on that div to scroll the page to it-->
+        <script src="static/js/ClickDiv_LocalStorage_Reviews.js"></script>
       </div>
     </div>
   </div>
