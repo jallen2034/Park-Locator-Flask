@@ -9,9 +9,10 @@ My Parks
 <!-- Div that holds the temp boostrap notification -->
 <div id="alert_placeholder"></div>
 <!-- Div with the text search box -->
+<!-- https://www.w3schools.com/jsref/event_onkeydown.asp -->
 <div class="gallery-search">
   <form id="input-filter">
-    <input type="text" placeholder="Search Here"  placeholder="Search Here" class=form-control
+    <input type="text" id="form-text" placeholder="Search Here" class=form-control onkeydown="TextSearch()">
   </form>
 </div>
 <div class="flex-container">
@@ -53,7 +54,7 @@ My Parks
         <!-- JS script to highlight a div clicked on -->
         <script src="static/js/HighlightReviewPark.js"></script>
         <!-- JS script to filter the divs by inout in the text search box -->
-        <!-- TODO -->
+        <script src="static/js/TextSearch.js"></script>
         <!-- script that will listen for the localstorage to have a park id in it, then use jscript to click on that div to scroll the page to it-->
         <script src="static/js/ClickDiv_LocalStorage_Reviews.js"></script>
       </div>
