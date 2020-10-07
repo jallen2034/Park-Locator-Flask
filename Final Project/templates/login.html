@@ -16,17 +16,17 @@ Log In
   </div>
   {% endif %}
 </div>
-
-<!-- JS script to hide and show the login error -->
-<script src="static/js/DismissLogin.js"></script>
-
-<form action="/login" method="post">
-  <div class="form-group">
-    <input autocomplete="off" autofocus class="form-control" name="username" placeholder="Username" type="text">
-  </div>
-  <div class="form-group">
-    <input class="form-control" name="password" placeholder="Password" type="password">
-  </div>
-  <button class="btn btn-primary" type="submit">Log In</button>
-</form>
+<div class="login">
+  <!-- JS script to hide and show the login error -->
+  <script src="static/js/DismissLogin.js"></script>
+  <form class="passwrord" action="/login" method="post">
+    <div class="form-group">
+      <input autocomplete="off" autofocus class="form-control" name="username" placeholder="Username" type="text">
+    </div>
+    <div class="form-group">
+      <input class="form-control" name="password" placeholder="Password" type="password">
+    </div>
+    <button class="btn btn-primary" type="submit">Log In</button>
+  </form>
+</div>
 {% endblock %}
