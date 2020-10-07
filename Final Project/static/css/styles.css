@@ -14,6 +14,22 @@ form {
   margin-top: 0px;
 }
 
+div.login{
+  margin-top: 150px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+div.register{
+  margin-top: 150px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
 .form-control {
   display: block;
   width: 100%;
