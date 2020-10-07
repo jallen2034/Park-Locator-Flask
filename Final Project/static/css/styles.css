@@ -171,16 +171,22 @@ img {
   padding-top: 8px;
   padding-bottom: 8px;
   margin-left: 60px;
-
 }
 
 .h4, h4 {
   font-size: 1.5rem;
+  padding-left: 10px;
+}
+
+.h5, h5 {
+  font-size: 1.5rem;
+  padding-left: 10px;
 }
 
 p {
   margin-top: 0;
   margin-bottom: 1rem;
+  padding-left: 10px;
 }
 
 p.reviews_p{
@@ -248,9 +254,23 @@ ul {
   margin-left: 60px;
 }
 
+div.button{
+  margin-left: 10px;
+  padding-top: 5px;
+}
+
+.btn-outline-primary {
+  color: #007bff;
+  background-color: transparent;
+  background-image: none;
+  border-color: #007bff;
+  margin-left: 10px;
+}
+
 .gallery-search {
   margin-top: 130px;
   justify-content: center;
   align-items: center;
   display: flex;
+
 }
