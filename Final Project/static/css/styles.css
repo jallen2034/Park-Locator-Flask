@@ -96,7 +96,7 @@ main img
 }
 
 /* https://stackoverflow.com/questions/4296012/hide-div-if-screen-is-smaller-than-a-certain-width */
-/* whent he screen gets below a certian width and collapses, change the max height of the map*/
+/* when the screen gets below a certian width and collapses, resize my divs with flexbox*/*/
 @media screen and (max-width: 768px) {
   .col-md-8 {
     max-height: 125px;
@@ -128,7 +128,7 @@ main img
 }
 
 /* https://stackoverflow.com/questions/4296012/hide-div-if-screen-is-smaller-than-a-certain-width */
-/* whent he screen gets below a certian width and collapses, change the max height of the map*/
+/* when the screen gets above a certian width and collapses, resize my divs with flexbox*/
 @media screen and (min-width: 769px) {
   /* https://stackoverflow.com/questions/2566290/html-how-to-create-a-div-with-only-vertical-scroll-bars-for-long-paragraphs */
   /* park list */
