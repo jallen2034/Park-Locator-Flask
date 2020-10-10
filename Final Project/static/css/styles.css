@@ -1,4 +1,4 @@
-/*  https://cs50.harvard.edu/x/2020/tracks/web/finance/ */
+
 nav .navbar-brand
 {
   /* size for brand */
@@ -8,14 +8,10 @@ nav .navbar-brand
 html {
   height: 100%;
 }
+
 body {
   min-height: 800px;
   overflow-y: scroll;
-}
-
-nav {
-  height: 80px; /* notice this value */
-  position: fixed;
 }
 
 form {
@@ -96,42 +92,92 @@ main img
 }
 
 /* https://stackoverflow.com/questions/4296012/hide-div-if-screen-is-smaller-than-a-certain-width */
-/* when the screen gets below a certian width and collapses, resize my divs with flexbox*/*/
+/* whent he screen gets below a certian width and collapses, change the max height of the map*/
 @media screen and (max-width: 768px) {
+  
+  /* https://www.w3schools.com/css/css3_flexbox.asp */
+  .flex-container {
+    display: flex;
+    flex-direction:row;
+    flex-wrap: wrap-reverse;
+    justify-content: center;
+    max-width: 100%;
+    max-height: 100%;
+    margin-top: 13%;
+    margin-left: 2%;
+    margin-right: 2%;
+  }
+  
   .col-md-8 {
     max-height: 125px;
     margin-top: 55px;
     margin-right: 0px;
   }
   #map{
-    max-height: 330px;
+    max-height: 300px;
   }
   .col-md-4 {
-    margin-top: 260px;
-    max-height: 475px;
+    margin-top: 200px;
+    max-height: 500px;
     margin-right: 4%;
     margin-bottom: 4%;
     overflow-y: scroll;
     overflow-x: hidden;
   }
   .col-md-5 {
-    margin-top: 50px;
-    max-height: 650px;
+    margin-top: 10%;
+    margin-bottom: 10%;
+    max-height: 750px;
     overflow-y: scroll;
     overflow-x: hidden;
+    margin-right: 20px;
+  }
+  
+  .col-md-12 {
+    max-width: 800px;
+    max-height: 625px;
+    padding-right: 10px;
+    margin-left: -12px;
+    overflow: auto;
+    height: 800px;
+    overflow-x: hidden;
+    justify-content: center;
+    align-items: center;
   }
   
   body {
     min-height: 600px;
     overflow-y: hidden;
   }
+  
+  .saved-parks {
+    margin-top: 50px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+  }
 }
 
 /* https://stackoverflow.com/questions/4296012/hide-div-if-screen-is-smaller-than-a-certain-width */
-/* when the screen gets above a certian width and collapses, resize my divs with flexbox*/
+/* whent he screen gets below a certian width and collapses, change the max height of the map*/
 @media screen and (min-width: 769px) {
   /* https://stackoverflow.com/questions/2566290/html-how-to-create-a-div-with-only-vertical-scroll-bars-for-long-paragraphs */
   /* park list */
+  
+  
+  /* https://www.w3schools.com/css/css3_flexbox.asp */
+  .flex-container {
+    display: flex;
+    flex-direction:row;
+    flex-wrap: wrap-reverse;
+    justify-content: center;
+    max-width: 100%;
+    max-height: 100%;
+    margin-top: 11%;
+    margin-left: 2%;
+    margin-right: 2%;
+  }
+  
   .col-md-4{
     margin-bottom: 0px;
     margin-left: 0px;
@@ -160,22 +206,13 @@ main img
     justify-content: center;
     align-items: center;
   }
-}
-
-/* https://www.w3schools.com/css/css3_flexbox.asp */
-.flex-container {
-  display: flex;
-  flex-direction:row;
-  flex-wrap: wrap-reverse;
-  justify-content: center;
-  max-width: 100%;
-  max-height: 100%;
-  margin-top: 11%;
-  margin-left: 2%;
-  margin-right: 2%;
-}
-
-#input-filter{
+  
+  .saved-parks {
+    margin-top: 120px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+  }
   
 }
 
@@ -297,9 +334,9 @@ ul {
   margin-left: 60px;
 }
 
-div.button{
-  margin-left: 10px;
-  padding-top: 5px;
+/* margin on the button */
+.btn{
+  margin: 3px;
 }
 
 .btn-outline-primary {
@@ -316,3 +353,4 @@ div.button{
   align-items: center;
   display: flex;
 }
+
