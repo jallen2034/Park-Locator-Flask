@@ -5,6 +5,14 @@ nav .navbar-brand
   font-size: xx-large;
 }
 
+html {
+  height: 100%;
+}
+body {
+  min-height: 800px;
+  overflow-y: scroll;
+}
+
 nav {
   height: 80px; /* notice this value */
   position: fixed;
@@ -78,6 +86,7 @@ main.container.p-5 {
   margin-top: 6%;
   max-width: 2000px;
   max-height: 1500px;
+  
 }
 
 main img
@@ -86,62 +95,92 @@ main img
   max-width: 100%;
 }
 
+/* https://stackoverflow.com/questions/4296012/hide-div-if-screen-is-smaller-than-a-certain-width */
+/* whent he screen gets below a certian width and collapses, change the max height of the map*/
+@media screen and (max-width: 768px) {
+  .col-md-8 {
+    max-height: 125px;
+    margin-top: 55px;
+    margin-right: 0px;
+  }
+  #map{
+    max-height: 330px;
+  }
+  .col-md-4 {
+    margin-top: 260px;
+    max-height: 475px;
+    margin-right: 4%;
+    margin-bottom: 4%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+  }
+  .col-md-5 {
+    margin-top: 50px;
+    max-height: 650px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+  }
+  
+  body {
+    min-height: 600px;
+    overflow-y: hidden;
+  }
+}
+
+/* https://stackoverflow.com/questions/4296012/hide-div-if-screen-is-smaller-than-a-certain-width */
+/* whent he screen gets below a certian width and collapses, change the max height of the map*/
+@media screen and (min-width: 769px) {
+  /* https://stackoverflow.com/questions/2566290/html-how-to-create-a-div-with-only-vertical-scroll-bars-for-long-paragraphs */
+  /* park list */
+  .col-md-4{
+    margin-bottom: 0px;
+    margin-left: 0px;
+    margin-right: 0px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    max-height: 625px;
+  }
+  
+  /* map */
+  .col-md-8 {
+    padding-left: 0px;
+  }
+  
+  /* my parks */
+  .col-md-5 {
+    max-width: 600px;
+  }
+  
+  .col-md-12 {
+    max-width: 1000px;
+    max-height: 625px;
+    overflow: auto;
+    height: 800px;
+    overflow-x: hidden;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
 /* https://www.w3schools.com/css/css3_flexbox.asp */
 .flex-container {
   display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
+  flex-direction:row;
+  flex-wrap: wrap-reverse;
   justify-content: center;
-  align-items: center;
   max-width: 100%;
   max-height: 100%;
-  margin-top: 8%;
-}
-
-/* https://stackoverflow.com/questions/2566290/html-how-to-create-a-div-with-only-vertical-scroll-bars-for-long-paragraphs */
-.col-md-4{
-  margin-top: 20px;
-  margin-bottom: 0px;
-  margin-left: 0px;
-  margin-right: 0px;
-  overflow-y: scroll;
-  overflow-x: hidden;
-  max-height: 625px;
-  max-width: 480px;
-}
-
-.col-md-12 {
-  max-width: 1000px;
-  max-height: 600px;
-  overflow: auto;
-  height: 800px;
-  overflow-x: hidden;
-  justify-content: center;
-  align-items: center;
-
-}
-
-.col-md-8 {
-  margin-top: 20px;
-  margin-bottom: 0px;
-  max-width: 1270px;
-  padding-left: 1px;
-
+  margin-top: 11%;
+  margin-left: 2%;
+  margin-right: 2%;
 }
 
 #input-filter{
-
+  
 }
 
 .individual_reviews{
   padding-top: 50px;
-}
-
-.col-md-6 {
-  margin-top: 20px;
-  margin-bottom: 0px;
-  max-width: 1270px;
-  padding-left: 1px;
 }
 
 img {
@@ -160,33 +199,37 @@ img {
 }
 
 .h6, h6 {
-  font-size: 1rem;
+  font-size: min(2vw, 15px);
   padding-top: 8px;
   padding-bottom: 8px;
   margin-left: 60px;
 }
 
 .h3, h3 {
-  font-size: 1.75rem;
+  font-size: min(3vw, 26px);
   padding-top: 8px;
   padding-bottom: 8px;
   margin-left: 60px;
 }
 
 .h4, h4 {
-  font-size: 1.5rem;
+  font-size: min(3vw, 18px);
   padding-left: 10px;
+  padding-right: 10px;
 }
 
 .h5, h5 {
-  font-size: 1.5rem;
+  font-size: min(3vw, 26px);
   padding-left: 10px;
+  padding-right: 10px;
 }
 
 p {
+  font-size: min(3vw, 18px);
   margin-top: 0;
   margin-bottom: 1rem;
   padding-left: 10px;
+  padding-right: 10px;
 }
 
 p.reviews_p{
@@ -272,5 +315,4 @@ div.button{
   justify-content: center;
   align-items: center;
   display: flex;
-
 }
