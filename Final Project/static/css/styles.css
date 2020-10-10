@@ -10,7 +10,7 @@ html {
 }
 
 body {
-  min-height: 800px;
+  min-height: 70%;
   overflow-y: scroll;
 }
 
@@ -82,7 +82,7 @@ main.container.p-5 {
   margin-top: 6%;
   max-width: 2000px;
   max-height: 1500px;
-  
+
 }
 
 main img
@@ -94,7 +94,7 @@ main img
 /* https://stackoverflow.com/questions/4296012/hide-div-if-screen-is-smaller-than-a-certain-width */
 /* whent he screen gets below a certian width and collapses, change the max height of the map*/
 @media screen and (max-width: 768px) {
-  
+
   /* https://www.w3schools.com/css/css3_flexbox.asp */
   .flex-container {
     display: flex;
@@ -103,36 +103,37 @@ main img
     justify-content: center;
     max-width: 100%;
     max-height: 100%;
-    margin-top: 13%;
     margin-left: 2%;
     margin-right: 2%;
   }
-  
+
   .col-md-8 {
     max-height: 125px;
-    margin-top: 55px;
+    margin-top: 100px;
     margin-right: 0px;
   }
   #map{
-    max-height: 300px;
+    max-height: 200px;
   }
   .col-md-4 {
-    margin-top: 200px;
-    max-height: 500px;
+    margin-top: 100px;
+    max-height: 325px;
     margin-right: 4%;
     margin-bottom: 4%;
     overflow-y: scroll;
     overflow-x: hidden;
   }
+
   .col-md-5 {
-    margin-top: 10%;
-    margin-bottom: 10%;
-    max-height: 750px;
+    margin-top: 50px;
+    margin-bottom: 5px;
+    max-height: 500px;
     overflow-y: scroll;
     overflow-x: hidden;
     margin-right: 20px;
-  }
-  
+    margin-left: -20px;
+ }
+
   .col-md-12 {
     max-width: 800px;
     max-height: 625px;
@@ -144,12 +145,12 @@ main img
     justify-content: center;
     align-items: center;
   }
-  
+
   body {
     min-height: 600px;
     overflow-y: hidden;
   }
-  
+
   .saved-parks {
     margin-top: 50px;
     justify-content: center;
@@ -163,8 +164,8 @@ main img
 @media screen and (min-width: 769px) {
   /* https://stackoverflow.com/questions/2566290/html-how-to-create-a-div-with-only-vertical-scroll-bars-for-long-paragraphs */
   /* park list */
-  
-  
+
+
   /* https://www.w3schools.com/css/css3_flexbox.asp */
   .flex-container {
     display: flex;
@@ -173,11 +174,12 @@ main img
     justify-content: center;
     max-width: 100%;
     max-height: 100%;
-    margin-top: 11%;
+    margin-top: 9%;
+    margin-bottom: 2%;
     margin-left: 2%;
     margin-right: 2%;
   }
-  
+
   .col-md-4{
     margin-bottom: 0px;
     margin-left: 0px;
@@ -186,17 +188,17 @@ main img
     overflow-x: hidden;
     max-height: 625px;
   }
-  
+
   /* map */
   .col-md-8 {
     padding-left: 0px;
   }
-  
+
   /* my parks */
   .col-md-5 {
     max-width: 600px;
   }
-  
+
   .col-md-12 {
     max-width: 1000px;
     max-height: 625px;
@@ -206,14 +208,14 @@ main img
     justify-content: center;
     align-items: center;
   }
-  
+
   .saved-parks {
     margin-top: 120px;
     justify-content: center;
     align-items: center;
     display: flex;
   }
-  
+
 }
 
 .individual_reviews{
@@ -335,7 +337,8 @@ ul {
 }
 
 /* margin on the button */
-.btn{
+.btn {
+  font-size: min(3vw, 16px);
   margin: 3px;
 }
 
