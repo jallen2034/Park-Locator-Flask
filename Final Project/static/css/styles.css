@@ -82,7 +82,7 @@ main.container.p-5 {
   margin-top: 6%;
   max-width: 2000px;
   max-height: 1500px;
-
+  
 }
 
 main img
@@ -92,9 +92,10 @@ main img
 }
 
 /* https://stackoverflow.com/questions/4296012/hide-div-if-screen-is-smaller-than-a-certain-width */
+/* mobile */
 /* whent he screen gets below a certian width and collapses, change the max height of the map*/
 @media screen and (max-width: 768px) {
-
+  
   /* https://www.w3schools.com/css/css3_flexbox.asp */
   .flex-container {
     display: flex;
@@ -106,7 +107,18 @@ main img
     margin-left: 2%;
     margin-right: 2%;
   }
-
+  
+  .list_item_myparks {
+    margin-top: 10px;
+    margin-bottom: 25px;
+    margin-right: -16px;
+    padding-top: 25px;
+    padding-bottom: 25px;
+    padding-left: 20px;
+    align-items: center;
+    justify-content: center;
+  }
+  
   .col-md-8 {
     max-height: 125px;
     margin-top: 100px;
@@ -119,53 +131,72 @@ main img
     margin-top: 100px;
     max-height: 325px;
     margin-right: 4%;
+    margin-left: -4%;
     margin-bottom: 4%;
     overflow-y: scroll;
     overflow-x: hidden;
   }
-
+  
   .col-md-5 {
-    margin-top: 50px;
+    margin-top: 75px;
     margin-bottom: 5px;
     max-height: 500px;
     overflow-y: scroll;
     overflow-x: hidden;
     margin-right: 20px;
-    margin-left: -20px;
- }
-
+    margin-left: -35px;
+  }
+  
   .col-md-12 {
     max-width: 800px;
-    max-height: 625px;
+    max-height: 450px;
     padding-right: 10px;
     margin-left: -12px;
     overflow: auto;
-    height: 800px;
+    height: 750px;
     overflow-x: hidden;
     justify-content: center;
     align-items: center;
   }
-
+  
   body {
     min-height: 600px;
     overflow-y: hidden;
   }
-
+  
   .saved-parks {
     margin-top: 50px;
     justify-content: center;
     align-items: center;
     display: flex;
   }
+  
+  .gallery-search {
+    margin-top: 120px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+  }
+  
 }
 
 /* https://stackoverflow.com/questions/4296012/hide-div-if-screen-is-smaller-than-a-certain-width */
+/* desktop */
 /* whent he screen gets below a certian width and collapses, change the max height of the map*/
 @media screen and (min-width: 769px) {
   /* https://stackoverflow.com/questions/2566290/html-how-to-create-a-div-with-only-vertical-scroll-bars-for-long-paragraphs */
   /* park list */
-
-
+  .list_item_myparks {
+    margin-top: 10px;
+    margin-bottom: 25px;
+    margin-left: 15px;
+    margin-right: -16px;
+    padding-top: 25px;
+    padding-bottom: 25px;
+    align-items: center;
+    justify-content: center;
+  }
+  
   /* https://www.w3schools.com/css/css3_flexbox.asp */
   .flex-container {
     display: flex;
@@ -179,7 +210,7 @@ main img
     margin-left: 2%;
     margin-right: 2%;
   }
-
+  
   .col-md-4{
     margin-bottom: 0px;
     margin-left: 0px;
@@ -188,34 +219,41 @@ main img
     overflow-x: hidden;
     max-height: 625px;
   }
-
+  
   /* map */
   .col-md-8 {
     padding-left: 0px;
   }
-
+  
   /* my parks */
   .col-md-5 {
     max-width: 600px;
   }
-
+  
   .col-md-12 {
     max-width: 1000px;
     max-height: 625px;
     overflow: auto;
-    height: 800px;
+    height: 850px;
     overflow-x: hidden;
     justify-content: center;
     align-items: center;
   }
-
+  
   .saved-parks {
     margin-top: 120px;
     justify-content: center;
     align-items: center;
     display: flex;
   }
-
+  
+  .gallery-search {
+    margin-top: 120px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+  }
+  
 }
 
 .individual_reviews{
@@ -238,33 +276,33 @@ img {
 }
 
 .h6, h6 {
-  font-size: min(2vw, 15px);
+  font-size: min(3vw, 15px);
   padding-top: 8px;
   padding-bottom: 8px;
   margin-left: 60px;
 }
 
 .h3, h3 {
-  font-size: min(3vw, 26px);
+  font-size: min(4vw, 26px);
   padding-top: 8px;
   padding-bottom: 8px;
   margin-left: 60px;
 }
 
 .h4, h4 {
-  font-size: min(3vw, 18px);
+  font-size: min(4vw, 18px);
   padding-left: 10px;
   padding-right: 10px;
 }
 
 .h5, h5 {
-  font-size: min(3vw, 26px);
+  font-size: min(4vw, 26px);
   padding-left: 10px;
   padding-right: 10px;
 }
 
 p {
-  font-size: min(3vw, 18px);
+  font-size: min(4vw, 18px);
   margin-top: 0;
   margin-bottom: 1rem;
   padding-left: 10px;
@@ -318,19 +356,6 @@ ul {
   justify-content: center;
 }
 
-/* https://www.w3schools.com/cssref/sel_class.asp */
-
-.list_item_myparks {
-  margin-top: 10px;
-  margin-bottom: 25px;
-  margin-left: 15px;
-  margin-right: -16px;
-  padding-top: 25px;
-  padding-bottom: 25px;
-  align-items: center;
-  justify-content: center;
-}
-
 .buttons{
   margin-top: 10px;
   margin-left: 60px;
@@ -338,7 +363,7 @@ ul {
 
 /* margin on the button */
 .btn {
-  font-size: min(3vw, 16px);
+  font-size: min(4vw, 16px);
   margin: 3px;
 }
 
@@ -349,11 +374,3 @@ ul {
   border-color: #007bff;
   margin-left: 10px;
 }
-
-.gallery-search {
-  margin-top: 130px;
-  justify-content: center;
-  align-items: center;
-  display: flex;
-}
-
