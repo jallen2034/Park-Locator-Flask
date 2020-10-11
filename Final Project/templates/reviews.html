@@ -23,30 +23,33 @@ My Parks
         <div class="saved_list">
           <!-- "new_review_dict" is a dict, containing key value pairs which have a list value, that list then holds dictionaries, which in turn hold key value pairs. -->
           <!-- jinja forloop to loop through the nested list of dictionaries in new_review_dict-->
-          {% for outer_key, outer_dict in new_review_dict.items() %}
-          <!-- https://www.w3schools.com/tags/tag_data.asp#:~:text=The%20tag%20is%20used,the%20element%20instead. -->
+          <!-- loop through the keys and items at the same time !-->
+          <!-- https://ttl255.com/jinja2-tutorial-part-2-loops-and-conditionals/ -->
+          {% for outer_key, outer_items in new_review_dict.items() %}
           <!-- https://www.w3schools.com/tags/att_global_title.asp -->
-          <div class="review_parks" id="Park {{ outer_dict[0]["place_id"] }}" title="{{ outer_key }}">
+          <div class="review_parks" id="Park {{ outer_items[0]["place_id"] }}" title="{{ outer_key }}">
             <!-- print outer key/park name -->
-            <h4 class="{{ outer_dict["place_id"] }}">
+            <h4 class="{{ outer_items["place_id"] }}" style="font-size:170%">
               {{ outer_key }}
             </h4>
             <!-- loop through the nested list (of dicts) -->
-            {% for index in outer_dict %}
-            <!-- loop through the dicts inside that list -->
-              {% for inner_key, inner_dict in index.items() %}
-              <div class="reviews_inner_div" id="Park {{ inner_dict["place_id"] }}">
-                <p class="reviews_p" style="font-size:85%">
+            {% for index in outer_items %}
+              <!-- loop through the dicts inside that list -->
+                <h4 class="reviews_author" style="font-size:110%">
                   <!-- when looping through this dict, if a key is the place_id, don't display it to the screen -->
-                  {% if inner_key != "place_id" %}
-                   {{ inner_dict }}
-                  {% endif %}
+                  {{ index["review_author"] }}
+                </h4>
+                <p class="reviews_rating" style="font-size:100%">
+                  <!-- when looping through this dict, if a key is the place_id, don't display it to the screen -->
+                  {{ index["review_rating"] }} stars
                 </p>
-              </div>
-              {% endfor %}
+                <p class="reviews_text" style="font-size:83%">
+                  <!-- when looping through this dict, if a key is the place_id, don't display it to the screen -->
+                  {{ index["review_text"] }}
+                </p>
             {% endfor %}
             <div class= "button">
-              <button type="button" class="btn btn-outline-secondary go_to_on_map" id="{{ outer_dict[0]["place_id"] }}" >Go to on Map</button>
+              <button type="button" class="btn btn-outline-secondary go_to_on_map" id="{{ outer_items[0]["place_id"] }}" >Go to on Map</button>
             </div>
           </div>
           {% endfor %}
