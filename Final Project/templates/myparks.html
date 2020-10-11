@@ -6,41 +6,53 @@ My Parks
 {% endblock %}
 
 {% block main %}
-<!-- Loop to create table rows containing each list of the passed in dicts -->
- <div class="margin: auto 1.5em; display: inline-block">
-    <div class="saved_list">
-      <!-- jinja forloop to create unique divs for each park from my python dict-->
-      {% for dictionary in saved_parks_dict %}
-      <div class="list_item" id="Park {{ dictionary["place_id"] }}">
-        <h3 class="{{ dictionary["place_id"] }}">
-          {{ dictionary["name"] }}
-        </h3>
-        <h6 class="{{ dictionary["place_id"] }}">
-          {{ dictionary["formatted_address"] }}
-        </h6>
-        {% if dictionary["phone"] is not none %}
-        <h6 class="{{ dictionary["place_id"] }}">
-          {{ dictionary["phone"] }}
-        </h6>
-        {% endif %}
-        {% if dictionary["website"] is not none %}
-        <h6 class="{{ dictionary["place_id"] }}">
-          <a href= "{{ dictionary["website"] }}" > Website </a>
-        </h6>
-        {% endif %}
-        <!-- boostrap buttons to add that park to the users saved park and also navigate them to the reviews tab!-->
-        <!-- create a button that calls a python function in my flask webserver when its pressed -->
-        <button type="button" type="submit" class="btn btn-outline-danger remove_from_parks_buttons" id="{{ dictionary["place_id"] }}">Remove From Saved Parks</button>
-        <button type="button" class="btn btn-outline-info" id="{{ dictionary["place_id"] }}">Reviews</button>
-        <button type="button" class="btn btn-outline-secondary" id="{{ dictionary["place_id"] }}">Go to on Map</button>
+<!-- Div that holds the temp boostrap notification -->
+<div id="alert_placeholder"></div>
+<div class="saved-parks">
+  <div class="col-md-5">
+    <!-- Loop to create table rows containing each list of the passed in dicts -->
+    <div class="margin: auto 1.5em; display: inline-block">
+      <div class="saved_list">
+        <!-- jinja forloop to create unique divs for each park from my python dict-->
+        {% for dictionary in saved_parks_dict %}
+        <div class="list_item_myparks" id="Park {{ dictionary["place_id"] }}">
+          <h3 class="{{ dictionary["place_id"] }}" style="font-size:125%">
+            {{ dictionary["name"] }}
+          </h3>
+          <h6 class="{{ dictionary["place_id"] }} " style="font-size:80%">
+            {{ dictionary["formatted_address"] }}
+          </h6>
+          {% if dictionary["phone"] is not none %}
+          <h6 class="{{ dictionary["place_id"] }}" style="font-size:80%">
+            {{ dictionary["phone"] }}
+          </h6>
+          {% endif %}
+          {% if dictionary["website"] is not none %}
+          <h6 class="{{ dictionary["place_id"] }}">
+            <a href= "{{ dictionary["website"] }}" > Website </a>
+          </h6>
+          {% endif %}
+          <!-- boostrap buttons to add that park to the users saved park and also navigate them to the reviews tab!-->
+          <!-- create a button that calls a python function in my flask webserver when its pressed -->
+          <div class="buttons">
+            <button type="button" type="submit" class="btn btn-outline-danger remove_from_parks_buttons" id="{{ dictionary["place_id"] }}">Remove From Saved Parks</button>
+            <button type="button" class="btn btn-outline-info go_to_reviews" id="{{ dictionary["place_id"] }}">Reviews</button>
+            <button type="button" class="btn btn-outline-secondary go_to_on_map" id="{{ dictionary["place_id"] }}">Go to on Map</button>
+          </div>
+        </div>
+        {% endfor %}
+        <!-- JS script to highlight a div clicked on -->
+        <script src="static/js/HighlightMyParks.js"></script>
+        <!-- JS script to hide and show the login error -->
+        <script src="static/js/DeletePark.js"></script>
+        <!-- call MapAjax.js script to loop through all of my divs & take the "go_to_on_map" from the buttons in these divs, & send that id to our browser's local storage to be used later  -->
+        <script src="static/js/GoToOnMap.js"></script>
+        <!-- call MapAjax.js script to loop through all of my divs & take the "go_to_reviews" from the buttons in these divs, & send that id to our browser's local storage to be used later  -->
+        <script src="static/js/GoToReviews.js"></script>
+        <!-- call MapAjax.js script to loop through all of my divs & take the "park_id" from the buttons in these divs, & send that id to flask with ajax -->
+        <script src="static/js/AjaxMapErrors.js"></script>
       </div>
-      {% endfor %}
-
-      <!-- JS script to handle when the "delete park" button is clicked -->
-      <script src="static/js/DeletePark.js"></script>
-
-      <!-- call MapAjax.js script to loop through all of my divs & take the "park_id" from the buttons in these divs, & send that id to flask with ajax -->
-      <script src="static/js/AjaxMapErrors.js"></script>
     </div>
   </div>
+</div>
 {% endblock %}
