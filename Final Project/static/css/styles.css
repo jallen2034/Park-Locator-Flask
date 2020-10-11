@@ -75,7 +75,7 @@ main.container.p-5 {
   margin-top: 6%;
   max-width: 2000px;
   max-height: 1500px;
-
+  
 }
 
 main img
@@ -88,7 +88,7 @@ main img
 /* mobile */
 /* whent he screen gets below a certian width and collapses, change the max height of the map*/
 @media screen and (max-width: 768px) {
-
+  
   .skatepark-reviews {
     display: flex;
     justify-content: center;
@@ -97,7 +97,7 @@ main img
     margin-bottom: 1%;
     max-height: 460px;
   }
-
+  
   /* https://www.w3schools.com/css/css3_flexbox.asp */
   .flex-container {
     display: flex;
@@ -109,7 +109,7 @@ main img
     margin-left: 2%;
     margin-right: 2%;
   }
-
+  
   .list_item_myparks {
     margin-top: 10px;
     margin-bottom: 25px;
@@ -120,7 +120,7 @@ main img
     align-items: center;
     justify-content: center;
   }
-
+  
   .col-md-8 {
     max-height: 125px;
     margin-top: 100px;
@@ -138,7 +138,7 @@ main img
     overflow-y: scroll;
     overflow-x: hidden;
   }
-
+  
   .col-md-5 {
     margin-top: 75px;
     margin-bottom: 5px;
@@ -148,7 +148,7 @@ main img
     margin-right: 20px;
     margin-left: -35px;
   }
-
+  
   .col-md-12 {
     max-width: 800px;
     max-height: 450px;
@@ -160,33 +160,32 @@ main img
     justify-content: center;
     align-items: center;
   }
-
+  
   body {
     min-height: 600px;
     overflow-y: hidden;
   }
-
+  
   .saved-parks {
     margin-top: 50px;
     justify-content: center;
     align-items: center;
     display: flex;
   }
-
+  
   .gallery-search {
-    margin-top: 110px;
+    margin-top: 120px;
     justify-content: center;
     align-items: center;
     display: flex;
   }
-
 }
 
 /* https://stackoverflow.com/questions/4296012/hide-div-if-screen-is-smaller-than-a-certain-width */
 /* desktop */
 /* whent he screen gets below a certian width and collapses, change the max height of the map*/
 @media screen and (min-width: 769px) {
-
+  
   .skatepark-reviews {
     display: flex;
     justify-content: center;
@@ -195,7 +194,7 @@ main img
     margin-bottom: 2%;
     max-height: 450px;
   }
-
+  
   /* https://stackoverflow.com/questions/2566290/html-how-to-create-a-div-with-only-vertical-scroll-bars-for-long-paragraphs */
   /* park list */
   .list_item_myparks {
@@ -208,7 +207,7 @@ main img
     align-items: center;
     justify-content: center;
   }
-
+  
   /* https://www.w3schools.com/css/css3_flexbox.asp */
   .flex-container {
     display: flex;
@@ -222,7 +221,7 @@ main img
     margin-left: 2%;
     margin-right: 2%;
   }
-
+  
   .col-md-4{
     margin-bottom: 0px;
     margin-left: 0px;
@@ -231,17 +230,17 @@ main img
     overflow-x: hidden;
     max-height: 625px;
   }
-
+  
   /* map */
   .col-md-8 {
     padding-left: 0px;
   }
-
+  
   /* my parks */
   .col-md-5 {
     max-width: 600px;
   }
-
+  
   .col-md-12 {
     max-width: 1000px;
     max-height: 625px;
@@ -251,14 +250,14 @@ main img
     justify-content: center;
     align-items: center;
   }
-
+  
   .saved-parks {
     margin-top: 120px;
     justify-content: center;
     align-items: center;
     display: flex;
   }
-
+  
   .gallery-search {
     margin-top: 6.5%;
     justify-content: center;
@@ -306,6 +305,10 @@ img {
   padding-right: 10px;
 }
 
+h4.reviews_author {
+  margin-top: 25px;
+}
+
 .h5, h5 {
   font-size: min(4vw, 26px);
   padding-left: 10px;
@@ -320,10 +323,14 @@ p {
   padding-right: 10px;
 }
 
-p.reviews_p{
+p.reviews_p {
   margin-top: 0;
   margin-bottom: 1rem;
   margin-left: 0px;
+}
+
+p.reviews_text{
+  margin-bottom: 20px;
 }
 
 #alert_placeholder {
