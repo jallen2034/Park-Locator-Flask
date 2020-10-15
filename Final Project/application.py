@@ -67,7 +67,7 @@ def parkcall():
     user_id = session["user_id"]
 
     # all potential errors + success messages that can be rendered on the buy html
-    error = "Sorry, you have already added this park into your Saved Parks!"
+    error = "You have already added this park into your Saved Parks!"
     success = "Park added to your Saved Parks!"
 
     # https://stackoverflow.com/questions/48595068/process-ajax-request-in-flask
@@ -249,24 +249,24 @@ def send_to_my_parks():
     # Query database for all of the parks currently stored in the "user_saved_parks" table
     saved_parks_dict = db.execute("SELECT place_id, name, formatted_address, phone, website, location_lat, location_long FROM (SELECT * FROM user_saved_parks JOIN all_skateparks ON user_saved_parks.place_id = all_skateparks.place_id JOIN skatepark_location ON all_skateparks.place_id = skatepark_location.place_id WHERE id = :user_id)",
                                   user_id=user_id)
-    return saved_parks_dict
 
+    return saved_parks_dict
 
 def send_to_reviews():
 
     new_review_dict = {}
 
     # Query database for all of the parks currently stored in the "all_skateparks" and "skateparks_reviews" tables
-    review_parks_dict = db.execute("SELECT * FROM all_skateparks JOIN skatepark_reviews ON all_skateparks.place_id = skatepark_reviews.place_id;")
+    review_parks_dict = db.execute("SELECT name, all_skateparks.place_id, review_author, review_rating, review_text FROM all_skateparks JOIN skatepark_reviews ON all_skateparks.place_id = skatepark_reviews.place_id;")
 
     # loop through the old list of dicts our SQL query returned in "review_parks_dict"
     for sqlDict in review_parks_dict:
         # create "park_name" var and set it to the current review_parks_dict "Name" in that list currenty being looped through
         park_name = sqlDict["name"]
         sqlDict.pop("name")
-        # when this forloop hits a new index of the list in "review_parks_dict", check if "review_parks_dict" already has already been a key thats been set in that new dict or not
+        # when this forloop hits a new index of the list in "review_parks_dict", check if "review_parks_dict" has already been a key thats been set in that new dict or not
         if park_name in new_review_dict.keys():
-            # copy the current dict from 'review_parks_dict' being loope dthrough, adding it as a new index into the array for this current (parks) key in our new 'new_review_dict'
+            # copy the current dict & its contents from 'review_parks_dict' being looped through, adding it as a new index into the array for this current (parks) key in our new 'new_review_dict'
             new_review_dict[park_name].append(sqlDict)
         else:
             # otherwise, when looping through, if no key has been made in our new dict using an existing park name from your old dick, create a new key in new_review_dict using the current "park_name"
