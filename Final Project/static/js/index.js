@@ -81,11 +81,9 @@ for (let i = 0; i < add_to_button.length; i++) {
 
 window.onload = function() {
   var clicked_button_id = localStorage.getItem('button_id');
-  console.log(clicked_button_id);
 
   if (clicked_button_id){
     var clicked_park_id = document.getElementById("Park " + clicked_button_id);
-    console.log(clicked_park_id);
     clicked_park_id.click();
     clicked_park_id.scrollIntoView({ behavior: 'smooth',});
     localStorage.removeItem('button_id');
@@ -153,9 +151,6 @@ function initMap(MyResult){
   for (var key in MyResult){
     for (i = 0; i < MyResult[key].length; i++){
       var json_obj = JSON.parse(MyResult[key][i]);
-      console.log(typeof json_obj['place_id']);
-      console.log(typeof json_obj['location_lat']);
-      console.log(typeof json_obj['location_long']);
       // parse the string values of the current lat and long in our dict as floats for the addMarker function to understand
       // https://www.w3schools.com/jsref/jsref_parsefloat.asp
       park_id = json_obj['place_id'];
