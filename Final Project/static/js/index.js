@@ -9,11 +9,11 @@ for (let i = 0; i < add_to_button.length; i++) {
   add_to_button[i].onclick = function(){
     button_id = add_to_button[i].id;
 
-    /* perform ajax call to flask with Jquery, to transmit my extracted "park_id" from one of the buttons
-    * since JS is asynchronous, our function will complete before the request completes, hence why we need the $.when function down below
-    * https://api.jquery.com/jquery.ajax/?fbclid=IwAR1pyVNbZvL-wjHamaczGlDexOjj6ePV8LAVhrg_0Bvy-sJsTYbXGcLC1YE
-    * https://stackoverflow.com/questions/44644114/whats-a-non-deprecated-way-of-doing-a-synchronous-ajax-call-using-jquery
-    * https://stackoverflow.com/questions/22372597/jquery-not-sending-json-on-ajax-post-request */
+    // perform ajax call to flask with Jquery, to transmit my extracted "park_id" from one of the buttons
+    // since JS is asynchronous, our function will complete before the request completes, hence why we need the $.when function down below
+    // https://api.jquery.com/jquery.ajax/?fbclid=IwAR1pyVNbZvL-wjHamaczGlDexOjj6ePV8LAVhrg_0Bvy-sJsTYbXGcLC1YE
+    // https://stackoverflow.com/questions/44644114/whats-a-non-deprecated-way-of-doing-a-synchronous-ajax-call-using-jquery
+    // https://stackoverflow.com/questions/22372597/jquery-not-sending-json-on-ajax-post-request
 
     $.when($.ajax({
       method: 'POST',
@@ -94,12 +94,11 @@ window.onload = function() {
 
 // call GoToReviews.js script to loop through all of my divs & take the "go_to_reviews" from the buttons in these divs, & send that id to our browser's local storage to be used later
 // use JS to grab every button on my page by their designated class_name "go_to_reviews" into a HTML collection
-
 let goto_reveiw_button = document.getElementsByClassName("go_to_reviews");
 
 // loop through every button in this array by its collected "element", add a listener to each index to detect when the [i]th "go_to_on_map" button looped through is clicked & store it inside "button_id"
+// grab the clicked collected buttons id & then store it in the "local storage" of the browser to be accessed later in our "/reviews" app route later
 for (let i = 0; i < goto_reveiw_button.length; i++){
-    //grab the clicked collected buttons id & then store it in the "local storage" of the browser to be accessed later in our "/reviews" app route later
     goto_reveiw_button[i].onclick = function(){
         button_id = goto_reveiw_button[i].id;
         localStorage.setItem('button_id', button_id);
@@ -111,8 +110,8 @@ for (let i = 0; i < goto_reveiw_button.length; i++){
 // JS to render the map and markers to the client
 
 // perform a 'GET' ajax call to flask with Jquery, to pull the JSON  trigger this ajax call when the document loads
-// The $.ajax method takes many parameters, some of which are required and others optional.
-// It contains two callback options success and error to handle the response received.
+// the $.ajax method takes many parameters, some of which are required and others optional.
+// it contains two callback options success and error to handle the response received.
 
 $(document).ready(function(){
   var json_object = null;
