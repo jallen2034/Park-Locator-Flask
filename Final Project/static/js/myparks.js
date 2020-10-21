@@ -1,5 +1,6 @@
 // JS script to send an ajax request to my server to delete a users saved park asynchronously
 // use JS to grab every button on my page by their designated class_name "remove_from_parks_button"
+
 let del_button = document.getElementsByClassName("remove_from_parks_buttons");
 let park_div = document.getElementsByClassName("list_item_myparks");
 
@@ -8,11 +9,12 @@ for (let i = 0; i < del_button.length; i++) {
   del_button[i].onclick = function(){
     button_id = del_button[i].id;
 
-    /* perform ajax call to flask with jquery, to transmit my extracted "park_id" from one of the buttons
-    * since JS is asynchronous, our function will complete before the request completes, hence why we need the $.when function down below
-    * https://api.jquery.com/jquery.ajax/?fbclid=IwAR1pyVNbZvL-wjHamaczGlDexOjj6ePV8LAVhrg_0Bvy-sJsTYbXGcLC1YE
-    * https://stackoverflow.com/questions/44644114/whats-a-non-deprecated-way-of-doing-a-synchronous-ajax-call-using-jquery
-    * https://stackoverflow.com/questions/22372597/jquery-not-sending-json-on-ajax-post-request */
+    // perform ajax call to flask with jquery, to transmit my extracted "park_id" from one of the buttons
+    // since JS is asynchronous, our function will complete before the request completes, hence why we need the $.when function down below
+    // https://api.jquery.com/jquery.ajax/?fbclid=IwAR1pyVNbZvL-wjHamaczGlDexOjj6ePV8LAVhrg_0Bvy-sJsTYbXGcLC1YE
+    // https://stackoverflow.com/questions/44644114/whats-a-non-deprecated-way-of-doing-a-synchronous-ajax-call-using-jquery
+    // https://stackoverflow.com/questions/22372597/jquery-not-sending-json-on-ajax-post-request
+
     $.when($.ajax({
       method: 'POST',
       url: "/parkdelete",
@@ -20,7 +22,7 @@ for (let i = 0; i < del_button.length; i++) {
       contentType: "application/json",
       data: JSON.stringify({ clicked_button : button_id })
 
-      // the response our flask web server will pass back to AJAX
+    // the response our flask web server will pass back to AJAX
     })).done(function(response) {
       console.log(response);
       console.log('Ajax call to delete park has been successful!');
@@ -48,8 +50,7 @@ for (let i = 0; i < del_button.length; i++) {
   }
 }
 
-// JS to highlight the parks
-// global variable to "hold" the div ID of the currently selected/highlioghted park
+// JS to highlight the parks. global variable to "hold" the div ID of the currently selected/highlioghted park
 // take all of the divs by the element "list_item_myparks" and store them in a HTML collection to loop through later
 var currently_highlighted_park;
 var init_highlighted_park_div = document.getElementsByClassName("list_item_myparks");
@@ -69,9 +70,10 @@ for (let i = 0; i < init_highlighted_park_div.length; i++) {
 // JS script to loop through all of my divs & take the "go_to_on_map" from the buttons in these divs, & send that id to our browser's local storage to be used later
 // use JS to grab every button on my page by their designated class_name "go_to_on_map"
 // these buttons by their clase name are stored in an array, into a single variable
+// loop through every button in this array by its collected "element", add a listener to each index to detect when the [i]th "go_to_on_map" button looped through is clicked & store it inside "button_id"
+
 let goto_map_button = document.getElementsByClassName("go_to_on_map");
 
-// loop through every button in this array by its collected "element", add a listener to each index to detect when the [i]th "go_to_on_map" button looped through is clicked & store it inside "button_id"
 for (let i = 0; i < goto_map_button.length; i++){
     goto_map_button[i].onclick = function(){
         button_id = goto_map_button[i].id;
@@ -84,9 +86,10 @@ for (let i = 0; i < goto_map_button.length; i++){
 // call MapAjax.js script to loop through all of my divs & take the "go_to_reviews" from the buttons in these divs, & send that id to our browser's local storage to be used later
 // use JS to grab every button on my page by their designated class_name "go_to_reviews"
 // these buttons by their class name are stored in an array, into a signle variable
+// loop through every button in this array by its collected "element", add a listener to each index to detect when the [i]th "go_to_on_map" button looped through is clicked & store it inside "button_id"
+
 let goto_reveiw_button = document.getElementsByClassName("go_to_reviews");
 
-// loop through every button in this array by its collected "element", add a listener to each index to detect when the [i]th "go_to_on_map" button looped through is clicked & store it inside "button_id"
 for (let i = 0; i < goto_reveiw_button.length; i++){
     goto_reveiw_button[i].onclick = function(){
         button_id = goto_reveiw_button[i].id;
