@@ -18,12 +18,12 @@ import sys
 from helpers import login_required
 
 # Configure application
-app = Flask(__name__)
 # Ensure that user sessions when they are logged in are not perm
-app.config["SESSION_PERMANENT"] = False
-# Ensure the location that we want to store the data for user sessions is going to be in the file system of the webserver we'll be running this application from (CS50 IDE)
-app.config["SESSION_TYPE"] = "filesystem"
 # We would like to enable sessions for this particular flask web app
+# Ensure the location that we want to store the data for user sessions is going to be in the file system of the webserver we'll be running this application from (CS50 IDE)
+app = Flask(__name__)
+app.config["SESSION_PERMANENT"] = False
+app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
 
 # Ensure templates are auto-reloaded when sent and recieved
@@ -48,7 +48,6 @@ def after_request(response):
 # Configure CS50 Library to use SQLite database
 db = SQL("sqlite:///parks.db")
 
-
 # app route to map out 1 park
 @app.route("/", methods=["GET"])
 @login_required
@@ -59,29 +58,26 @@ def index():
     return render_template("index.html", index_park_info=index_park_info)
 
 # app route to pass map markers for parks to our index page and be rendered onto a map
+# Loop through the list of dicts in index_park_info, convert the dicts in each index of this list into JSON to transmit, store the json strings in a new index of the empty list.
+# transmit the previously empty list, not the original one (that contained the dicts), after jsonifying it. jsonify will turn this into a json object with one key and the list as a value.
 @app.route("/homepage", methods=["GET"])
 @login_required
 def map_render():
-    """Homepage with Park locator"""
+    """Ajax call to Homepage with Park locator"""
     index_park_info = send_to_index()
     json_list = []
-    # Loop through the list of dicts in index_park_info, convert the dicts in each index of this list into JSON to transmit, store the json strings in a new index of the empty list.
     for dictionary in index_park_info:
         json_list.append(json.dumps(dictionary, indent = 2))
-
     pprint.pprint(json_list)
-    # transmit the previously empty list, not the original one (that contained the dicts), after jsonifying it. jsonify will turn this into a json object with one key and the list as a value.
     return jsonify({'result' : json_list})
 
 # app route to recieve and process our ajax call to add a selected park from the map to the current users login into the parks.db
+# all potential errors + success messages that can be rendered on the buy html
 @app.route("/parkcall", methods=["POST"])
 @login_required
 def parkcall():
-
-    # extract the current logged in users ID from the session["user_id"] dict & store it inside of "user_id" to use below
+    """Ajax call to handle button press notifications to the index"""
     user_id = session["user_id"]
-
-    # all potential errors + success messages that can be rendered on the buy html
     error = "You have already added this park into your Saved Parks!"
     success = "Park added to your Saved Parks!"
 
@@ -89,28 +85,21 @@ def parkcall():
     # https://flask.palletsprojects.com/en/0.12.x/patterns/jquery/
     # request.get.json() functiona lso conversts returned JSON from our AJAX call into a Python Dict
     add_button_id = request.get_json()
-
-     # Print the type of data variable
     print("Type:", type(add_button_id))
-
-
-    # Query database for all of the parks currently stored in the "user_saved_parks" table
     saved_parks_dict = db.execute("SELECT * FROM user_saved_parks WHERE id = :user_id",
                                   user_id=user_id)
 
     # Extract the button id from this returned dict, then store these values in seperate variables
     extracted_button_id = add_button_id["clicked_button"]
 
-    # loop through "saved_parks_dict", if it finds the "place_id" in the returned "button_id" from ajax matches the "place_ID" in the returned dict from our db, pass an error as a JSON object back to the front end
+    # loop through "saved_parks_dict", if it finds the "place_id" in the returned "button_id" from ajax matches the "place_ID" in the returned dict from our db, pass an error as a JSON object back to the client
     for dictionary in saved_parks_dict:
         if extracted_button_id == dictionary['place_id']:
            return jsonify({'error_notification' : error})
 
-    # Query database for all of the parks currently stored in the "user_saved_parks" table
+    # otherwise insert that park id from the clicked button into this users saved parks table
     db.execute("INSERT INTO user_saved_parks (id, place_id) VALUES (?, ?);",
                       user_id, extracted_button_id)
-
-    # return our "success" message with JSON to our front end for ajax to recieve and our page to later use
     return jsonify({'success_notification' : success})
 
 # app route to recieve the ajax call from "my_parks" pages delete button to delete the park from the users saved parks
@@ -118,15 +107,11 @@ def parkcall():
 @login_required
 def parkdelete():
     """Page with all parks"""
-
     user_id = session["user_id"]
-
-    # all potential errors + success messages that can be rendered on the buy html
     success = "Park has been removed from your saved parks!"
 
     # request.get.json() functiona lso conversts returned JSON from our AJAX call into a Python Dict
     del_button_id = request.get_json()
-
     print("Type:", type(del_button_id))
 
     # Extract the button id from this returned dict, then store these values in seperate variables
@@ -135,8 +120,6 @@ def parkdelete():
     # delete this park from the user saved parks table
     db.execute("DELETE FROM user_saved_parks WHERE id = :userid AND place_id = :place_id;",
                 userid=user_id, place_id=extracted_button_id)
-
-    # return our "success" message with JSON to our front end for ajax to recieve and our page to later use
     return jsonify({'success_notification' : success})
 
 # app route to see your saved parks
@@ -162,24 +145,20 @@ def reviews():
 def register():
     """Register user"""
 
+    # handle register errors
     if request.method == "GET":
         return render_template("register.html")
-
     else:
         errors = ["Must provide username", "Must provide password", "Password and confirmation must match", "Username is taken"]
 
         if not request.form.get("username"):
             return render_template("register.html", errors=errors[0])
-
         elif not request.form.get("password"):
             return render_template("register.html", errors=errors[1])
-
         elif request.form.get("password") != request.form.get("confirmation"):
             return render_template("register.html", errors=errors[2])
-
         rows = db.execute("SELECT username FROM users WHERE username = :username;",
             username=request.form.get("username"))
-
         if len(rows) != 0:
             return render_template("register.html", errors=errors[3])
 
@@ -189,15 +168,12 @@ def register():
 
     db.execute("INSERT INTO users(username,hash) VALUES (?,?);",
         user_name, hash_pw)
-
     success_login = ["Registered!"]
 
     # select the username from our db as the current session and store it as the current users logged in session, it's the first index in the list of dicts returned
     session["user_id"] = db.execute("SELECT id FROM users WHERE username = :username;",
                           username=user_name) [0]["id"]
-
     index_park_info = send_to_index()
-
     return render_template("index.html", success_login=success_login[0], index_park_info=index_park_info)
 
 @app.route("/logout")
@@ -205,9 +181,8 @@ def logout():
     """Log user out"""
 
     # Forget any user_id
-    session.clear()
-
     # Redirect user to login form
+    session.clear()
     return redirect("/")
 
 @app.route("/login", methods=["GET", "POST"])
@@ -224,10 +199,9 @@ def login():
         errors = ["Must provide a username", "Must provide password", "Invalid username and/or password"]
 
         # Ensure username was submitted
+        # Ensure password was submitted
         if not request.form.get("username"):
             return render_template("login.html", errors=errors[0])
-
-        # Ensure password was submitted
         elif not request.form.get("password"):
             return render_template("login.html", errors=errors[1])
 
@@ -239,10 +213,8 @@ def login():
         if len(rows) != 1 or not check_password_hash(rows[0]["hash"], request.form.get("password")):
             return render_template("login.html", errors=errors[2])
 
-        # Remember which user has logged in
+        # Remember which user has logged in and Redirect user to home page
         session["user_id"] = rows[0]["id"]
-
-        # Redirect user to home page
         return redirect("/")
 
     # User reached route via GET (as by clicking a link or via redirect)
@@ -264,7 +236,6 @@ def send_to_my_parks():
     # Query database for all of the parks currently stored in the "user_saved_parks" table
     saved_parks_dict = db.execute("SELECT place_id, name, formatted_address, phone, website, location_lat, location_long FROM (SELECT * FROM user_saved_parks JOIN all_skateparks ON user_saved_parks.place_id = all_skateparks.place_id JOIN skatepark_location ON all_skateparks.place_id = skatepark_location.place_id WHERE id = :user_id)",
                                   user_id=user_id)
-
     return saved_parks_dict
 
 
@@ -287,5 +258,4 @@ def send_to_reviews():
         else:
             # otherwise, when looping through, if no key has been made in our new dict using an existing park name from your old dick, create a new key in new_review_dict using the current "park_name"
             new_review_dict[park_name] = [sqlDict]
-
     return new_review_dict
