@@ -58,6 +58,21 @@ def index():
     # pprint.pprint(index_park_info)
     return render_template("index.html", index_park_info=index_park_info)
 
+# app route to pass map markers for parks to our index page and be rendered onto a map
+@app.route("/homepage", methods=["GET"])
+@login_required
+def map_render():
+    """Homepage with Park locator"""
+    index_park_info = send_to_index()
+    json_list = []
+    # Loop through the list of dicts in index_park_info, convert the dicts in each index of this list into JSON to transmit, store the json strings in a new index of the empty list.
+    for dictionary in index_park_info:
+        json_list.append(json.dumps(dictionary, indent = 2))
+
+    pprint.pprint(json_list)
+    # transmit the previously empty list, not the original one (that contained the dicts), after jsonifying it. jsonify will turn this into a json object with one key and the list as a value.
+    return jsonify({'result' : json_list})
+
 # app route to recieve and process our ajax call to add a selected park from the map to the current users login into the parks.db
 @app.route("/parkcall", methods=["POST"])
 @login_required
@@ -139,7 +154,7 @@ def myparks():
 def reviews():
     """Page with park reviews"""
     new_review_dict = send_to_reviews()
-    pprint.pprint(new_review_dict)
+    # pprint.pprint(new_review_dict)
     return render_template("reviews.html", new_review_dict=new_review_dict)
 
 # app route to register an account
@@ -252,6 +267,7 @@ def send_to_my_parks():
 
     return saved_parks_dict
 
+
 def send_to_reviews():
 
     new_review_dict = {}
@@ -264,9 +280,9 @@ def send_to_reviews():
         # create "park_name" var and set it to the current review_parks_dict "Name" in that list currenty being looped through
         park_name = sqlDict["name"]
         sqlDict.pop("name")
-        # when this forloop hits a new index of the list in "review_parks_dict", check if "review_parks_dict" has already been a key thats been set in that new dict or not
+        # when this forloop hits a new index of the list in "review_parks_dict", check if "review_parks_dict" already has already been a key thats been set in that new dict or not
         if park_name in new_review_dict.keys():
-            # copy the current dict & its contents from 'review_parks_dict' being looped through, adding it as a new index into the array for this current (parks) key in our new 'new_review_dict'
+            # copy the current dict from 'review_parks_dict' being looped through, adding it as a new index into the array for this current (parks) key in our new 'new_review_dict'
             new_review_dict[park_name].append(sqlDict)
         else:
             # otherwise, when looping through, if no key has been made in our new dict using an existing park name from your old dick, create a new key in new_review_dict using the current "park_name"
