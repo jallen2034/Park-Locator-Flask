@@ -144,7 +144,7 @@ function initMap(MyResult){
   console.log("JSON object from Flask back end:", MyResult);
 
   // https://stackoverflow.com/questions/684672/how-do-i-loop-through-or-enumerate-a-javascript-object
-  // loop through the 'result', which containes a list. remember when we created a json string with the key 'result' in jasonify from flask like this: return jsonify({'result' :}) json_list})
+  // loop through the 'result', which containes a list. remember when we created a json string with the key 'result' in jasonify from flask like this: return jsonify({'result' : json_list})
   // MyResult[key] is the list. The full list of JSON strings. loop through the lengh of how many list indxes there are here
   // then parse the JSON string at the list index contained inside the 'result' being looped through into a new JSON object in a variable
 
