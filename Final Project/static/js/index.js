@@ -106,7 +106,6 @@ for (let i = 0; i < goto_reveiw_button.length; i++){
 };
 
 // JS to render the map and markers to the client
-
 // perform a 'GET' ajax call to flask with Jquery, to pull the JSON  trigger this ajax call when the document loads
 // the $.ajax method takes many parameters, some of which are required and others optional.
 // it contains two callback options success and error to handle the response received.
