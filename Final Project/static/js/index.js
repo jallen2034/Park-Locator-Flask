@@ -35,10 +35,10 @@ for (let i = 0; i < add_to_button.length; i++) {
         // https://stackoverflow.com/questions/10082330/dynamically-create-bootstrap-alerts-box-through-javascript
         // call the #alert_placeholder temp div and populate it with the boostrap banner
         bootstrap_alert = function() {}
-        bootstrap_alert.warning = function(extracted_response) {
+        bootstrap_alert.warning = function() {
           $('#alert_placeholder').html('<div class="alert alert-primary fade show p-1" role="alert" style="position:abolute;z-index:999;">'+extracted_response+'</span></div>')
         }
-        // display the alert and the div
+        // call this function to display the alert and the div
         bootstrap_alert.warning(extracted_response);
 
         // function to hide the alert after 3.5 secs
@@ -56,11 +56,11 @@ for (let i = 0; i < add_to_button.length; i++) {
         // https://stackoverflow.com/questions/10082330/dynamically-create-bootstrap-alerts-box-through-javascript
         // call the #alert_placeholder temp div and populate it with the boostrap banner
         bootstrap_alert = function() {}
-        bootstrap_alert.warning = function(extracted_response) {
+        bootstrap_alert.warning = function() {
           $('#alert_placeholder').html('<div class="alert alert-danger fade show p-1" role="alert" style="position:abolute;z-index:999;">'+extracted_response+'</span></div>')
         }
-        // display the alert and the div
-        bootstrap_alert.warning(extracted_response);
+        // call this function to display the alert and the div
+        bootstrap_alert.warning();
 
         // function to hide the alert after 3.5 secs
         $(document).ready(function() {
