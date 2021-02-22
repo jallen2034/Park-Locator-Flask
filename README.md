@@ -14,7 +14,7 @@ Register page:
 
 Park Overview page:
 
-!["Adding a park"](https://i.imgur.com/c4ee1H3.png)
+!["Adding a park"](https://i.imgur.com/9WQuZDN.png)
 
 My Parks page:
 
