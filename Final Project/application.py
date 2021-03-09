@@ -54,7 +54,6 @@ db = SQL("sqlite:///parks.db")
 def index():
     """Homepage with Park locator"""
     index_park_info = send_to_index()
-    # pprint.pprint(index_park_info)
     return render_template("index.html", index_park_info=index_park_info)
 
 # app route to pass map markers for parks to our index page and be rendered onto a map
@@ -68,7 +67,6 @@ def map_render():
     json_list = []
     for dictionary in index_park_info:
         json_list.append(json.dumps(dictionary, indent = 2))
-    pprint.pprint(json_list)
     return jsonify({'result' : json_list})
 
 # app route to recieve and process our ajax call to add a selected park from the map to the current users login into the parks.db
@@ -85,7 +83,6 @@ def parkcall():
     # https://flask.palletsprojects.com/en/0.12.x/patterns/jquery/
     # request.get.json() functiona lso conversts returned JSON from our AJAX call into a Python Dict
     add_button_id = request.get_json()
-    print("Type:", type(add_button_id))
     saved_parks_dict = db.execute("SELECT * FROM user_saved_parks WHERE id = :user_id",
                                   user_id=user_id)
 
@@ -112,7 +109,6 @@ def parkdelete():
 
     # request.get.json() functiona lso conversts returned JSON from our AJAX call into a Python Dict
     del_button_id = request.get_json()
-    print("Type:", type(del_button_id))
 
     # Extract the button id from this returned dict, then store these values in seperate variables
     extracted_button_id = del_button_id["clicked_button"]
@@ -128,7 +124,6 @@ def parkdelete():
 def myparks():
     """Page with all parks"""
     saved_parks_dict = send_to_my_parks()
-    # pprint.pprint(saved_parks_dict)
     return render_template("myparks.html", saved_parks_dict=saved_parks_dict)
 
 # app route to see all reviews of parks
@@ -137,7 +132,6 @@ def myparks():
 def reviews():
     """Page with park reviews"""
     new_review_dict = send_to_reviews()
-    # pprint.pprint(new_review_dict)
     return render_template("reviews.html", new_review_dict=new_review_dict)
 
 # app route to register an account
@@ -225,7 +219,6 @@ def send_to_index():
 
     # Query db, joining both the all_skateparks & skateparks_location tables, to grab the park info + location of a park to send to my index.html
     index_park_info = db.execute("SELECT place_id, name, formatted_address, phone, website, location_lat, location_long FROM (SELECT * FROM all_skateparks JOIN skatepark_location ON all_skateparks.place_id = skatepark_location.place_id);")
-
     return index_park_info
 
 def send_to_my_parks():
