@@ -67,11 +67,11 @@ def insert_reviews(place_details, db):
     place_id = place_details['result']['place_id']
     reviews = place_details['result'].get('reviews')
 
+    # loop through each list item of individual reviews for the current skatepark being called in main
+    # variables to store what from the current review on this iteration of the loop I want to insert into my db
+    # https://realpython.com/python-defaultdict/
     if reviews != None:
-        # loop through each list item of individual reviews for the current skatepark being called in main
         for review in place_details['result']['reviews']:
-            # variables to store what from the current review on this iteration of the loop I want to insert into my db
-            # https://realpython.com/python-defaultdict/
             author_name = review['author_name']
             author_url = review['author_url']
             language = review.get('language')
